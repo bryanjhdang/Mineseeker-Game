@@ -15,6 +15,18 @@ public class OptionsData {
         // Private to prevent anyone from instantiating
     }
 
+    /**
+     * Method to retrieve the class without accessing
+     * it by the constructor
+     * @return the only instance of the class
+     */
+    public static OptionsData getInstance() {
+        if(instance == null) {
+            instance = new OptionsData();
+        }
+        return instance;
+    }
+
     public int getRowNum() {
         return rowNum;
     }
