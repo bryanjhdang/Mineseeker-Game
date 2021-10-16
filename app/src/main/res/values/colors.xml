@@ -7,4 +7,14 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="light_coral">#EF767A</color>
+    <color name="queen_blue">#456990</color>
+    <color name="light_green">#49BEAA</color>
+    <color name="turquoise">#49DCB1</color>
+    <color name="sunray">#EEB868</color>
+
+    <color name="pink">#CA6680</color>
+    <color name="terra_cotta">#D57A66</color>
+    <color name="gold_crayola">#EDC79B</color>
 </resources>
