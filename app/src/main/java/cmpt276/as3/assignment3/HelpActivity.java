@@ -22,4 +22,6 @@ public class HelpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
     }
+
+    // make it so that the text is for each of the description upon creation
 }

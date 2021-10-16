@@ -11,12 +11,16 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import cmpt276.as3.assignment3.model.OptionsData;
+
 /**
  * Options activity to let the user choose board size
  * and number of mines for the next game
  */
 public class OptionsActivity extends AppCompatActivity
     implements AdapterView.OnItemSelectedListener{
+
+//    private OptionsData optionsData = OptionsData.getInstance();
 
     public static Intent optionsLaunchIntent(Context c) {
         Intent intent = new Intent(c, OptionsActivity.class);
@@ -47,6 +51,11 @@ public class OptionsActivity extends AppCompatActivity
         spinner.setOnItemSelectedListener(this);
     }
 
+    private void setOptions() {
+        // grab the stuff from the scanner
+        // call the setters from the singleton class
+    }
+
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         String text = adapterView.getItemAtPosition(i).toString();
@@ -59,5 +68,9 @@ public class OptionsActivity extends AppCompatActivity
 
     }
 
-
+    @Override
+    public void onBackPressed() {
+        setOptions();
+        super.onBackPressed();
+    }
 }
