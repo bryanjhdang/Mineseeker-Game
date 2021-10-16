@@ -20,7 +20,7 @@ import cmpt276.as3.assignment3.model.OptionsData;
 public class OptionsActivity extends AppCompatActivity
     implements AdapterView.OnItemSelectedListener{
 
-//    private OptionsData optionsData = OptionsData.getInstance();
+    private OptionsData optionsData = OptionsData.getInstance();
 
     public static Intent optionsLaunchIntent(Context c) {
         Intent intent = new Intent(c, OptionsActivity.class);

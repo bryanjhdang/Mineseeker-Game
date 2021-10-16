@@ -25,6 +25,7 @@ public class WelcomeActivity extends AppCompatActivity {
         menuBtn.setOnClickListener(view -> {
             Intent i = MenuActivity.menuLaunchIntent(WelcomeActivity.this);
             startActivity(i);
+            finish();
         });
     }
 }
