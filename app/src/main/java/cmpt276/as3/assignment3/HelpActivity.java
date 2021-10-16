@@ -1,6 +1,7 @@
 package cmpt276.as3.assignment3;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.text.HtmlCompat;
 
 import android.content.Context;
 import android.content.Intent;
@@ -23,8 +24,24 @@ public class HelpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
 
-        TextView test = findViewById(R.id.descriptionText);
-        test.setText("hello");
+        TextView gameDescription = (TextView) findViewById(R.id.descriptionText);
+        String formattedDescription = "<b>Cat Seeker</b>" +
+                "<br> Player can choose the size of the game board and number of cats hidden. " +
+                "Tap any button to search for the cat. If the cat is there, well done. " +
+                "Otherwise, player will start the scanner that shows the number of hidden cats in that row and column.</br>";
+        gameDescription.setText(HtmlCompat.fromHtml(formattedDescription, HtmlCompat.FROM_HTML_MODE_LEGACY));
+
+        TextView gameAuthor = (TextView) findViewById(R.id.authorText);
+        String formattedAuthor = "<b>Author</b>" +
+                "<br>Written by Bryan Dang and Lynn Nguyen, students in Intro for Software Engineering " +
+                "(<a href='https://opencoursehub.cs.sfu.ca/bfraser/grav-cms/cmpt276/home'>https://opencoursehub.cs.sfu.ca/bfraser/grav-cms/cmpt276/home</a>)</br>";
+        gameAuthor.setText(HtmlCompat.fromHtml(formattedAuthor, HtmlCompat.FROM_HTML_MODE_LEGACY));
+
+        TextView gameSource = (TextView) findViewById(R.id.sourcesText);
+        String formattedSource = "<b>Resources</b>" +
+                "<br>Images from Pinterest</br>";
+        gameSource.setText(HtmlCompat.fromHtml(formattedSource, HtmlCompat.FROM_HTML_MODE_LEGACY));
+
     }
 
     // make it so that the text is for each of the description upon creation
