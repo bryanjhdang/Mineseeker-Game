@@ -11,17 +11,22 @@
         android:theme="@style/Theme.Assignment3">
         <activity
             android:name=".HelpActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".OptionsActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".GameActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".MenuActivity"
-            android:exported="true" />
-        <activity android:name=".MainActivity">
+            android:exported="true"
+            android:screenOrientation="landscape" />
+        <activity android:name=".WelcomeActivity"
+            android:screenOrientation="landscape" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

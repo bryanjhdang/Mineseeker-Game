@@ -6,4 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".GameActivity">
 
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="game view"
+        tools:layout_editor_absoluteX="293dp"
+        tools:layout_editor_absoluteY="157dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
