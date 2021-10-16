@@ -29,7 +29,7 @@ public class OptionsActivity extends AppCompatActivity {
     final String TAG = "TAG_MSG";
     private OptionsData optionsData = OptionsData.getInstance();
 
-    public static Intent optionsLaunchIntent(Context c) {
+    public static Intent launchIntent(Context c) {
         Intent intent = new Intent(c, OptionsActivity.class);
         return intent;
     }

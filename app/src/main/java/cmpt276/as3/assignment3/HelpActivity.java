@@ -13,7 +13,7 @@ import android.widget.TextView;
  */
 public class HelpActivity extends AppCompatActivity {
 
-    public static Intent helpLaunchIntent(Context c) {
+    public static Intent launchIntent(Context c) {
         Intent intent = new Intent(c, HelpActivity.class);
         return intent;
     }
