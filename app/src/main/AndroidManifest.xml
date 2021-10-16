@@ -19,6 +19,7 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".GameActivity"
+            android:label="Let's get started!"
             android:exported="true"
             android:screenOrientation="landscape" />
         <activity
