@@ -6,6 +6,7 @@
         <item>5 rows by 10 columns</item>
         <item>6 rows by 15 columns</item>
     </string-array>
+
     <string-array name="mines">
         <item>6 mines</item>
         <item>10 mines</item>
