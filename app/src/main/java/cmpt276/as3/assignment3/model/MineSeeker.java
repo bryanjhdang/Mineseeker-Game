@@ -5,17 +5,23 @@ package cmpt276.as3.assignment3.model;
  * Class that handles the game logic.
  */
 public class MineSeeker {
-    private OptionsData option = OptionsData.getInstance();
     private int numMines;
     private int numRows;
     private int numCols;
     private CellInformation[][] gameBoard;
 
-    public MineSeeker() {
-        numMines = option.getMineNum();
-        numRows = option. getRowNum();
-        numCols = option.getColumnNum();
-        gameBoard = new CellInformation[numRows][numMines];
+    public MineSeeker(int numMines, int numRows, int numCols) {
+        this.numMines = numMines;
+        this.numRows = numRows;
+        this.numCols = numCols;
+        gameBoard = new CellInformation[numRows][numCols];
+
+        for (int row = 0; row < numRows; row++) {
+            for (int col = 0; col < numCols; col++) {
+                CellInformation newCell = new CellInformation();
+                gameBoard[row][col] = newCell;
+            }
+        }
 
         randMinesPosition();
     }
@@ -25,12 +31,11 @@ public class MineSeeker {
      */
     private void randMinesPosition() {
         int countMines = 0;
-        int totalCells = numRows * numCols;
 
         while (countMines < numMines) {
-            int randPosition = (int) ((Math.random() * (totalCells - 0)) + 0);
-            int randRow = randPosition / numRows;
-            int randCol = randPosition % numCols;
+            //int randPosition = (int) ((Math.random() * (totalCells - 0)) + 0);
+            int randRow = (int) ((Math.random() * (numRows - 0)) + 0);
+            int randCol = (int) ((Math.random() * (numCols - 0)) + 0);
 
             if (gameBoard[randRow][randCol].getMineInformation() == false) {
                 gameBoard[randRow][randCol].setMineInformation(true);
@@ -71,5 +76,13 @@ public class MineSeeker {
         }
 
         return countMines;
+    }
+
+    // DELETE LATER
+    public boolean checkForMine(int row, int col) {
+        if (gameBoard[row][col].getMineInformation() == true) {
+            return true;
+        }
+        return false;
     }
 }

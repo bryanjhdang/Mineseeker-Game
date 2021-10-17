@@ -1,6 +1,5 @@
 package cmpt276.as3.assignment3;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -17,14 +16,20 @@ import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 
+import cmpt276.as3.assignment3.model.MineSeeker;
+import cmpt276.as3.assignment3.model.OptionsData;
+
 
 /**
  * Activity that displays the game
  */
 public class GameActivity extends AppCompatActivity {
-    private static final int NUM_ROWS = 4;
-    private static final int NUM_COLS = 6;
-    Button buttons[][] = new Button[NUM_ROWS][NUM_COLS];
+    private OptionsData option = OptionsData.getInstance();
+    private int numMines;
+    private int numRows;
+    private int numCols;
+    Button[][] buttons;
+    private MineSeeker catSeeker;
 
     public static Intent launchIntent(Context c) {
         Intent intent = new Intent(c, GameActivity.class);
@@ -37,13 +42,23 @@ public class GameActivity extends AppCompatActivity {
         removeInitialBars();
         setContentView(R.layout.activity_game);
 
+        getOptionForGrid();
         populateButtons();
+    }
+
+    private void getOptionForGrid() {
+        numMines = option.getMineNum();
+        numRows = option.getRowNum();
+        numCols = option.getColumnNum();
+        buttons = new Button[numRows][numCols];
+        catSeeker = new MineSeeker(numMines, numRows, numCols);
     }
 
     private void populateButtons() {
         TableLayout table = (TableLayout) findViewById(R.id.tableForButtons);
 
-        for (int row = 0; row < NUM_ROWS; row++) {
+        for (int row = 0; row < numRows; row++) {
+            // Populate the rows
             TableRow tableRow = new TableRow(GameActivity.this);
             tableRow.setLayoutParams(new TableLayout.LayoutParams(
                     TableLayout.LayoutParams.MATCH_PARENT,
@@ -51,7 +66,8 @@ public class GameActivity extends AppCompatActivity {
                     1.0f));
             table.addView(tableRow);
 
-            for (int col = 0; col < NUM_COLS; col++) {
+            // Populate the number of buttons in each row.
+            for (int col = 0; col < numCols; col++) {
                 final int FINAL_ROW = row;
                 final int FINAL_COL = col;
 
@@ -60,14 +76,11 @@ public class GameActivity extends AppCompatActivity {
                         TableRow.LayoutParams.MATCH_PARENT,
                         TableRow.LayoutParams.MATCH_PARENT,
                         1.0f));
-
-                //button.setText(row + "," + col);
-                // Make text not clip on the small buttons.
-                //button.setPadding(0,0,0,0);
-                //lockButtonSize();
                 button.setBackgroundResource(R.drawable.house);
 
-
+                if (catSeeker.checkForMine(row, col) == true) {
+                    button.setText("MINE");
+                }
 
                 // Display a message when accessing each button
                 button.setOnClickListener(new View.OnClickListener() {
@@ -89,8 +102,8 @@ public class GameActivity extends AppCompatActivity {
 
         // Lock the button size
         lockButtonSize();
-        //currentButton.setBackgroundResource(R.drawable.cat1);
 
+        // Scale the image to fit inside the button
         int newWidth = currentButton.getWidth();
         int newHeight = currentButton.getHeight();
         Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.cat1);
@@ -103,8 +116,8 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void lockButtonSize() {
-        for (int row = 0; row < NUM_ROWS; row++) {
-            for (int col = 0; col < NUM_COLS; col++) {
+        for (int row = 0; row < numRows; row++) {
+            for (int col = 0; col < numCols; col++) {
                 Button currentButton = buttons[row][col];
 
                 int width = currentButton.getWidth();
