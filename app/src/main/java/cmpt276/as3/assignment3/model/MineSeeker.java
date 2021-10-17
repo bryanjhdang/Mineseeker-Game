@@ -28,7 +28,7 @@ public class MineSeeker {
         int totalCells = numRows * numCols;
 
         while (countMines < numMines) {
-            int randPosition = (int) ((Math.random() * (totalCells - 0)) + 0;
+            int randPosition = (int) ((Math.random() * (totalCells - 0)) + 0);
             int randRow = randPosition / numRows;
             int randCol = randPosition % numCols;
 
