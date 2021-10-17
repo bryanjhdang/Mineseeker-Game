@@ -10,12 +10,16 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.Toast;
+import android.view.Window;
+import android.view.WindowManager;
 
 /**
  * Activity that displays the game
@@ -25,7 +29,7 @@ public class GameActivity extends AppCompatActivity {
     private static final int NUM_COLS = 6;
     Button buttons[][] = new Button[NUM_ROWS][NUM_COLS];
 
-    public static Intent gameLaunchIntent(Context c) {
+    public static Intent launchIntent(Context c) {
         Intent intent = new Intent(c, GameActivity.class);
         return intent;
     }
@@ -33,6 +37,7 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        removeInitialBars();
         setContentView(R.layout.activity_game);
 
         populateButtons();
@@ -114,6 +119,13 @@ public class GameActivity extends AppCompatActivity {
                 currentButton.setMaxHeight(height);
             }
         }
+    }
+
+    // https://www.youtube.com/watch?v=jOWW95u15S0&ab_channel=TechProjects
+    private void removeInitialBars() {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
     // call getter method to create the game
