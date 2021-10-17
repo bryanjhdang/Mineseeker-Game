@@ -1,11 +1,16 @@
 <resources>
     <string name="app_name">Assignment3</string>
 
-    <string-array name="numbers">
-        <item>One</item>
-        <item>Two</item>
-        <item>Three</item>
-        <item>Four</item>
-        <item>Five</item>
+    <string-array name="size">
+        <item>4 rows by 6 columns</item>
+        <item>5 rows by 10 columns</item>
+        <item>6 rows by 15 columns</item>
+    </string-array>
+
+    <string-array name="mines">
+        <item>6 mines</item>
+        <item>10 mines</item>
+        <item>15 mines</item>
+        <item>20 mines</item>
     </string-array>
 </resources>

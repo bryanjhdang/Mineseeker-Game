@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 
 /**
@@ -13,7 +15,7 @@ import android.widget.Button;
  */
 public class MenuActivity extends AppCompatActivity {
 
-    public static Intent menuLaunchIntent(Context c) {
+    public static Intent launchIntent(Context c) {
         Intent intent = new Intent(c, MenuActivity.class);
         return intent;
     }
@@ -21,9 +23,17 @@ public class MenuActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        removeInitialBars();
         setContentView(R.layout.activity_main_menu);
 
         displayAllButtons();
+    }
+
+    // https://www.youtube.com/watch?v=jOWW95u15S0&ab_channel=TechProjects
+    private void removeInitialBars() {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
     public void displayAllButtons() {
@@ -35,7 +45,7 @@ public class MenuActivity extends AppCompatActivity {
     public void setGameButton() {
         Button gameBtn = findViewById(R.id.gameButton);
         gameBtn.setOnClickListener(view -> {
-            Intent i = GameActivity.gameLaunchIntent(MenuActivity.this);
+            Intent i = GameActivity.launchIntent(MenuActivity.this);
             startActivity(i);
         });
     }
@@ -43,7 +53,7 @@ public class MenuActivity extends AppCompatActivity {
     public void setOptionsButton() {
         Button optionsBtn = findViewById(R.id.optionsButton);
         optionsBtn.setOnClickListener(view -> {
-            Intent i = OptionsActivity.optionsLaunchIntent(MenuActivity.this);
+            Intent i = OptionsActivity.launchIntent(MenuActivity.this);
             startActivity(i);
         });
     }
@@ -51,7 +61,7 @@ public class MenuActivity extends AppCompatActivity {
     public void setHelpButton() {
         Button helpBtn = findViewById(R.id.helpButton);
         helpBtn.setOnClickListener(view -> {
-            Intent i = HelpActivity.helpLaunchIntent(MenuActivity.this);
+            Intent i = HelpActivity.launchIntent(MenuActivity.this);
             startActivity(i);
         });
     }

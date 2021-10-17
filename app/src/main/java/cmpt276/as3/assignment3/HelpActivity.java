@@ -6,6 +6,8 @@ import androidx.core.text.HtmlCompat;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 /**
@@ -14,7 +16,7 @@ import android.widget.TextView;
  */
 public class HelpActivity extends AppCompatActivity {
 
-    public static Intent helpLaunchIntent(Context c) {
+    public static Intent launchIntent(Context c) {
         Intent intent = new Intent(c, HelpActivity.class);
         return intent;
     }
@@ -22,6 +24,7 @@ public class HelpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        removeInitialBars();
         setContentView(R.layout.activity_help);
 
         TextView gameDescription = (TextView) findViewById(R.id.descriptionText);
@@ -42,6 +45,13 @@ public class HelpActivity extends AppCompatActivity {
                 "<br>Images from Pinterest</br>";
         gameSource.setText(HtmlCompat.fromHtml(formattedSource, HtmlCompat.FROM_HTML_MODE_LEGACY));
 
+    }
+
+    // https://www.youtube.com/watch?v=jOWW95u15S0&ab_channel=TechProjects
+    private void removeInitialBars() {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
     // make it so that the text is for each of the description upon creation
