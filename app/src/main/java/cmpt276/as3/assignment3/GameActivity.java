@@ -13,7 +13,7 @@ import android.view.WindowManager;
  */
 public class GameActivity extends AppCompatActivity {
 
-    public static Intent gameLaunchIntent(Context c) {
+    public static Intent launchIntent(Context c) {
         Intent intent = new Intent(c, GameActivity.class);
         return intent;
     }

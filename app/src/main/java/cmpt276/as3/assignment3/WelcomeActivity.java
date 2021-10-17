@@ -33,7 +33,7 @@ public class WelcomeActivity extends AppCompatActivity {
     private void setMenuButton() {
         Button menuBtn = findViewById(R.id.menuButton);
         menuBtn.setOnClickListener(view -> {
-            Intent i = MenuActivity.menuLaunchIntent(WelcomeActivity.this);
+            Intent i = MenuActivity.launchIntent(WelcomeActivity.this);
             startActivity(i);
             finish();
         });

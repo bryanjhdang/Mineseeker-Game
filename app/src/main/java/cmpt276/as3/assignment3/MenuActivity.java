@@ -15,7 +15,7 @@ import android.widget.Button;
  */
 public class MenuActivity extends AppCompatActivity {
 
-    public static Intent menuLaunchIntent(Context c) {
+    public static Intent launchIntent(Context c) {
         Intent intent = new Intent(c, MenuActivity.class);
         return intent;
     }
@@ -45,7 +45,7 @@ public class MenuActivity extends AppCompatActivity {
     public void setGameButton() {
         Button gameBtn = findViewById(R.id.gameButton);
         gameBtn.setOnClickListener(view -> {
-            Intent i = GameActivity.gameLaunchIntent(MenuActivity.this);
+            Intent i = GameActivity.launchIntent(MenuActivity.this);
             startActivity(i);
         });
     }
@@ -53,7 +53,7 @@ public class MenuActivity extends AppCompatActivity {
     public void setOptionsButton() {
         Button optionsBtn = findViewById(R.id.optionsButton);
         optionsBtn.setOnClickListener(view -> {
-            Intent i = OptionsActivity.optionsLaunchIntent(MenuActivity.this);
+            Intent i = OptionsActivity.launchIntent(MenuActivity.this);
             startActivity(i);
         });
     }
@@ -61,7 +61,7 @@ public class MenuActivity extends AppCompatActivity {
     public void setHelpButton() {
         Button helpBtn = findViewById(R.id.helpButton);
         helpBtn.setOnClickListener(view -> {
-            Intent i = HelpActivity.helpLaunchIntent(MenuActivity.this);
+            Intent i = HelpActivity.launchIntent(MenuActivity.this);
             startActivity(i);
         });
     }
