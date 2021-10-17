@@ -21,8 +21,8 @@ import android.widget.Toast;
  * Activity that displays the game
  */
 public class GameActivity extends AppCompatActivity {
-    private static final int NUM_ROWS = 6;
-    private static final int NUM_COLS = 15;
+    private static final int NUM_ROWS = 4;
+    private static final int NUM_COLS = 6;
     Button buttons[][] = new Button[NUM_ROWS][NUM_COLS];
 
     public static Intent gameLaunchIntent(Context c) {
@@ -59,9 +59,13 @@ public class GameActivity extends AppCompatActivity {
                         TableRow.LayoutParams.MATCH_PARENT,
                         1.0f));
 
-                button.setText(row + "," + col);
+                //button.setText(row + "," + col);
                 // Make text not clip on the small buttons.
-                button.setPadding(0,0,0,0);
+                //button.setPadding(0,0,0,0);
+                //lockButtonSize();
+                button.setBackgroundResource(R.drawable.house);
+
+
 
                 // Display a message when accessing each button
                 button.setOnClickListener(new View.OnClickListener() {
@@ -78,18 +82,22 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void gridButtonClicked(int row, int col) {
-        Toast.makeText(GameActivity.this, "Button clicked" + row + ", " + col, Toast.LENGTH_SHORT)
-                .show();
-
         // Display image after the button is clicked.
         Button currentButton = buttons[row][col];
 
         // Lock the button size
         lockButtonSize();
-        currentButton.setBackgroundResource(R.drawable.ic_android_black_24dp);
+        //currentButton.setBackgroundResource(R.drawable.cat1);
+
+        int newWidth = currentButton.getWidth();
+        int newHeight = currentButton.getHeight();
+        Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.cat1);
+        Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
+        Resources resource = getResources();
+        currentButton.setBackground(new BitmapDrawable(resource, scaledBitmap));
 
         // Change text after clicking.
-        currentButton.setText("CAT");
+        currentButton.setText("1");
     }
 
     private void lockButtonSize() {
