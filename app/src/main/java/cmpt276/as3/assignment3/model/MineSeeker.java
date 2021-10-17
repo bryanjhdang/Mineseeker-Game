@@ -51,6 +51,14 @@ public class MineSeeker {
         gameBoard[currentRow][currentCol].setCellInformation(true);
     }
 
+    public boolean isEmptyCellRevealed(int currentRow, int currentCol) {
+        if (gameBoard[currentRow][currentCol].getMineInformation() == false
+                && gameBoard[currentRow][currentCol].getCellInformation() == true) {
+            return true;
+        }
+        return false;
+    }
+
     /**
      * Class works as a scanner to return the number of mines in that row and column.
      */
@@ -65,7 +73,7 @@ public class MineSeeker {
             }
         }
 
-        // Then scan horizontally of the currentCol
+        // Then scan vertically of the currentCol
         for (int row = 0; row < numRows; row++) {
             if (row != currentRow) {
                 if (gameBoard[row][currentCol].getMineInformation() == true

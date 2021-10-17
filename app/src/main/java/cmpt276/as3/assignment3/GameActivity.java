@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.Window;
@@ -16,6 +17,7 @@ import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 
+import cmpt276.as3.assignment3.model.CellInformation;
 import cmpt276.as3.assignment3.model.MineSeeker;
 import cmpt276.as3.assignment3.model.OptionsData;
 
@@ -76,7 +78,7 @@ public class GameActivity extends AppCompatActivity {
                         TableRow.LayoutParams.MATCH_PARENT,
                         TableRow.LayoutParams.MATCH_PARENT,
                         1.0f));
-                button.setBackgroundResource(R.drawable.house);
+                //button.setBackgroundResource(R.drawable.house);
 
                 if (catSeeker.checkForMine(row, col) == true) {
                     button.setText("MINE");
@@ -87,7 +89,9 @@ public class GameActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         gridButtonClicked(FINAL_ROW, FINAL_COL);
+                        //updateNumMines(FINAL_ROW, FINAL_COL);
                     }
+
                 });
 
                 tableRow.addView(button);
@@ -99,20 +103,43 @@ public class GameActivity extends AppCompatActivity {
     private void gridButtonClicked(int row, int col) {
         // Display image after the button is clicked.
         Button currentButton = buttons[row][col];
+        catSeeker.revealedCell(row, col);
 
         // Lock the button size
         lockButtonSize();
 
-        // Scale the image to fit inside the button
-        int newWidth = currentButton.getWidth();
-        int newHeight = currentButton.getHeight();
-        Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.cat1);
-        Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
-        Resources resource = getResources();
-        currentButton.setBackground(new BitmapDrawable(resource, scaledBitmap));
+        if (catSeeker.checkForMine(row, col) == true) {
+            // Scale the image to fit inside the button
+            int newWidth = currentButton.getWidth();
+            int newHeight = currentButton.getHeight();
+            Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.cat1);
+            Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
+            Resources resource = getResources();
+            currentButton.setBackground(new BitmapDrawable(resource, scaledBitmap));
 
-        // Change text after clicking.
-        currentButton.setText("1");
+            for (int currRow = 0; currRow < numRows; currRow++) {
+                for (int currCol = 0; currCol < numCols; currCol++) {
+                    if (catSeeker.isEmptyCellRevealed(currRow, currCol) == true) {
+                        int scanForMines = catSeeker.numMinesInRowCol(currRow, currCol);
+                        buttons[currRow][currCol].setText("" + scanForMines);
+
+                        buttons[currRow][currCol].setTextColor(0xFFFFFFFF);
+                    }
+                }
+            }
+
+        } else {
+            // It is an empty cell, start the scanner
+            currentButton.setBackgroundResource(0);
+
+            int scanForMines = catSeeker.numMinesInRowCol(row, col);
+            currentButton.setText("" + scanForMines);
+
+            currentButton.setPadding(0,0,0,0);
+            currentButton.setTextSize(22);
+            currentButton.setTypeface(null, Typeface.BOLD);
+            currentButton.setTextColor(0xFFFFFFFF);
+        }
     }
 
     private void lockButtonSize() {
