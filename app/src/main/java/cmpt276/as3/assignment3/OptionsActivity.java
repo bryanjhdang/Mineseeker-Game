@@ -39,9 +39,17 @@ public class OptionsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        removeInitialBars();
         setContentView(R.layout.activity_options);
 
         displayAllSpinners();
+    }
+
+    // https://www.youtube.com/watch?v=jOWW95u15S0&ab_channel=TechProjects
+    private void removeInitialBars() {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
     /**
