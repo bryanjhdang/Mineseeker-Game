@@ -22,7 +22,6 @@ public class MineSeeker {
                 gameBoard[row][col] = newCell;
             }
         }
-
         randMinesPosition();
     }
 
@@ -59,6 +58,14 @@ public class MineSeeker {
         return false;
     }
 
+    // DELETE LATER
+    public boolean checkForMine(int row, int col) {
+        if (gameBoard[row][col].getMineInformation() == true) {
+            return true;
+        }
+        return false;
+    }
+
     /**
      * Class works as a scanner to return the number of mines in that row and column.
      */
@@ -84,13 +91,5 @@ public class MineSeeker {
         }
 
         return countMines;
-    }
-
-    // DELETE LATER
-    public boolean checkForMine(int row, int col) {
-        if (gameBoard[row][col].getMineInformation() == true) {
-            return true;
-        }
-        return false;
     }
 }

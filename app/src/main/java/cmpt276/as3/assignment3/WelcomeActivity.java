@@ -32,6 +32,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
     private void setMenuButton() {
         Button menuBtn = findViewById(R.id.menuButton);
+        menuBtn.setTextColor(0xFF000000);
         menuBtn.setOnClickListener(view -> {
             Intent i = MenuActivity.launchIntent(WelcomeActivity.this);
             startActivity(i);
