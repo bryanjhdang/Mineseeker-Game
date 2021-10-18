@@ -14,7 +14,7 @@ public class OptionsData {
     private OptionsData() {
         // Private to prevent anyone from instantiating
 
-        // Initialize default options
+        // Initialize default options (5x10 size, 10 mines)
         rowNum = 5;
         columnNum = 10;
         mineNum = 10;
