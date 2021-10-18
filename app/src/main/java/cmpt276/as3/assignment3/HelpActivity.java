@@ -6,6 +6,7 @@ import androidx.core.text.HtmlCompat;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -39,11 +40,18 @@ public class HelpActivity extends AppCompatActivity {
                 "<br>Written by Bryan Dang and Lynn Nguyen, students in Intro for Software Engineering " +
                 "(<a href='https://opencoursehub.cs.sfu.ca/bfraser/grav-cms/cmpt276/home'>https://opencoursehub.cs.sfu.ca/bfraser/grav-cms/cmpt276/home</a>)</br>";
         gameAuthor.setText(HtmlCompat.fromHtml(formattedAuthor, HtmlCompat.FROM_HTML_MODE_LEGACY));
+        gameAuthor.setMovementMethod(LinkMovementMethod.getInstance());
 
         TextView gameSource = (TextView) findViewById(R.id.sourcesText);
         String formattedSource = "<b>Resources</b>" +
-                "<br>Images from Pinterest</br>";
+                "<br>Theme inspired by the game Neko Atsume " +
+                "(<a href='https://www.nekoatsume.com/en/'>https://www.nekoatsume.com/</a>)</br>" +
+                "<br>Icons from CLEANPNG" +
+                "(<a href='https://www.cleanpng.com/'>https://www.cleanpng.com/</a>)</br>" +
+                "<br>Images from Pinterest" +
+                "(<a href='https://www.pinterest.com/'>https://www.pinterest.com/</a>)</br>";
         gameSource.setText(HtmlCompat.fromHtml(formattedSource, HtmlCompat.FROM_HTML_MODE_LEGACY));
+        gameSource.setMovementMethod(LinkMovementMethod.getInstance());
 
     }
 
