@@ -48,8 +48,8 @@
         android:id="@+id/boxCat"
         android:layout_width="177dp"
         android:layout_height="125dp"
+        android:layout_marginStart="-200dp"
         android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/welcomeTitle"
         app:srcCompat="@drawable/box_sprite" />
