@@ -64,6 +64,7 @@ public class OptionsActivity extends AppCompatActivity {
     private void displayAllSpinners() {
         setUpSpinner(R.id.sizeSpinner, R.array.size);
         setUpSpinner(R.id.mineSpinner, R.array.mines);
+        setSpinnerOptions();
     }
 
     /**
@@ -77,6 +78,60 @@ public class OptionsActivity extends AppCompatActivity {
                 (this, stringArrayId, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+    }
+
+    /**
+     * When starting the activity, display the options that the user
+     * chose previously (or default) on the spinner
+     */
+    private void setSpinnerOptions() {
+        int currRowNum = optionsData.getRowNum();
+        int currMineNum = optionsData.getMineNum();
+
+        Spinner sizeSpinner = findViewById(R.id.sizeSpinner);
+        Spinner mineSpinner = findViewById(R.id.mineSpinner);
+
+        final int size4x6 = 0;
+        final int size5x10 = 1;
+        final int size6x15 = 2;
+
+        switch(currRowNum) {
+            case 4:
+                sizeSpinner.setSelection(size4x6);
+                break;
+            case 5:
+                sizeSpinner.setSelection(size5x10);
+                break;
+            case 6:
+                sizeSpinner.setSelection(size6x15);
+                break;
+            default:
+                Log.d(TAG, "Something went wrong with reading size");
+                break;
+        }
+
+        final int sixMines = 0;
+        final int tenMines = 1;
+        final int fifteenMines = 2;
+        final int twentyMines = 3;
+
+        switch(currMineNum) {
+            case 6:
+                mineSpinner.setSelection(sixMines);
+                break;
+            case 10:
+                mineSpinner.setSelection(tenMines);
+                break;
+            case 15:
+                mineSpinner.setSelection(fifteenMines);
+                break;
+            case 20:
+                mineSpinner.setSelection(twentyMines);
+                break;
+            default:
+                Log.d(TAG, "Something went wrong with reading mine number");
+                break;
+        }
     }
 
     /**

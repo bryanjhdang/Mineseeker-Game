@@ -13,6 +13,11 @@ public class OptionsData {
     private static OptionsData instance;
     private OptionsData() {
         // Private to prevent anyone from instantiating
+
+        // Initialize default options
+        rowNum = 5;
+        columnNum = 10;
+        mineNum = 10;
     }
 
     /**
