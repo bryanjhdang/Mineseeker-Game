@@ -32,7 +32,6 @@ public class MineSeeker {
         int countMines = 0;
 
         while (countMines < numMines) {
-            //int randPosition = (int) ((Math.random() * (totalCells - 0)) + 0);
             int randRow = (int) ((Math.random() * (numRows - 0)) + 0);
             int randCol = (int) ((Math.random() * (numCols - 0)) + 0);
 
@@ -57,6 +56,25 @@ public class MineSeeker {
         }
         return false;
     }
+
+    public void catClickTwice(int currentRow, int currentCol) {
+        gameBoard[currentRow][currentCol].setMineClickedTwice(true);
+    }
+
+    public boolean isClickTwice(int currentRow, int currentCol) {
+        if (gameBoard[currentRow][currentCol].isMineClickedTwice() == true) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isCellRevealed(int currentRow, int currentCol) {
+        if (gameBoard[currentRow][currentCol].getCellInformation() == true) {
+            return true;
+        }
+        return false;
+    }
+
 
     // DELETE LATER
     public boolean checkForMine(int row, int col) {

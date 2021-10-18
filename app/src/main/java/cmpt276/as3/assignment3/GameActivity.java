@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import cmpt276.as3.assignment3.model.MineSeeker;
@@ -27,6 +28,8 @@ import cmpt276.as3.assignment3.model.OptionsData;
  */
 public class GameActivity extends AppCompatActivity {
     private OptionsData option = OptionsData.getInstance();
+    private int numCatsFound = 0;
+    private int numScanUsed = 0;
     private int numMines;
     private int numRows;
     private int numCols;
@@ -45,6 +48,8 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
         getOptionForGrid();
+        displayNumCatsFound();
+        displayNumScanUsed();
         populateButtons();
     }
 
@@ -79,13 +84,6 @@ public class GameActivity extends AppCompatActivity {
                         TableRow.LayoutParams.MATCH_PARENT,
                         1.0f));
 
-                //************************
-                if (catSeeker.checkForMine(row, col) == true) {
-                    button.setText("MINE");
-                    button.setPadding(0,0,0,0);
-                }
-                //************************
-
                 // Display a message when accessing each button
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -101,11 +99,35 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void gridButtonClicked(int row, int col) {
-        if (catSeeker.checkForMine(row, col) == true) {
-            buttonRevealCat(row, col);
-        } else {
+        if (catSeeker.checkForMine(row, col) == false) {
+            numScanUsed++;
+            displayNumScanUsed();
             startScanner(row, col);
         }
+
+        if (catSeeker.checkForMine(row, col) == true && catSeeker.isCellRevealed(row, col) == false) {
+            numCatsFound++;
+            displayNumCatsFound();
+            buttonRevealCat(row, col);
+        } else if (catSeeker.checkForMine(row, col) == true && catSeeker.isCellRevealed(row, col) == true){
+            numScanUsed++;
+            displayNumScanUsed();
+
+            catSeeker.catClickTwice(row, col);
+            buttonRevealCat(row, col);
+        }
+    }
+
+    private void displayNumCatsFound() {
+        TextView foundText = (TextView) findViewById(R.id.numCatsFound);
+        String result = "Found " + numCatsFound + " of " + numMines + " Cats";
+        foundText.setText(result);
+    }
+
+    private void displayNumScanUsed() {
+        TextView scanText = (TextView) findViewById(R.id.numScansUsed);
+        String result = "# Scans used: " + numScanUsed + "";
+        scanText.setText(result);
     }
 
     private void buttonRevealCat(int row, int col) {
@@ -120,16 +142,25 @@ public class GameActivity extends AppCompatActivity {
         // Scale the image to fit inside the button
         int newWidth = currentButton.getWidth();
         int newHeight = currentButton.getHeight();
-        Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.cat1);
+        Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.cat2);
         Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
         Resources resource = getResources();
         currentButton.setBackground(new BitmapDrawable(resource, scaledBitmap));
 
+        int scanForMines = 0;
+        // Check text in the cat cell if it is click again.
+        if (catSeeker.isClickTwice(row, col) == true) {
+            scanForMines = catSeeker.numMinesInRowCol(row, col);
+            buttons[row][col].setText("" + scanForMines);
+            buttons[row][col].setTextColor(0xFFFFFFFF);
+        }
+
         // Change text on other empty revealed cell when one cat is found.
         for (int currRow = 0; currRow < numRows; currRow++) {
             for (int currCol = 0; currCol < numCols; currCol++) {
-                if (catSeeker.isEmptyCellRevealed(currRow, currCol) == true) {
-                    int scanForMines = catSeeker.numMinesInRowCol(currRow, currCol);
+                if (catSeeker.isEmptyCellRevealed(currRow, currCol) == true
+                    || catSeeker.isClickTwice(currRow, currCol) == true) {
+                    scanForMines = catSeeker.numMinesInRowCol(currRow, currCol);
                     buttons[currRow][currCol].setText("" + scanForMines);
                     buttons[currRow][currCol].setTextColor(0xFFFFFFFF);
                 }
