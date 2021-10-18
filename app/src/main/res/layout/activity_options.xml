@@ -13,6 +13,7 @@
         android:layout_width="272dp"
         android:layout_height="32dp"
         android:layout_marginStart="50dp"
+        android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@+id/sizeText"
         app:layout_constraintTop_toTopOf="@+id/sizeText" />
 
@@ -21,6 +22,7 @@
         android:layout_width="272dp"
         android:layout_height="32dp"
         android:layout_marginStart="50dp"
+        android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@+id/mineText"
         app:layout_constraintTop_toTopOf="@+id/mineText" />
 
