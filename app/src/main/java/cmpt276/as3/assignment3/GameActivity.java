@@ -91,13 +91,6 @@ public class GameActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         gridButtonClicked(FINAL_ROW, FINAL_COL);
-
-                        if (numCatsFound == numMines) {
-                            FragmentManager manager = getSupportFragmentManager();
-                            MessageFragment dialog = new MessageFragment();
-                            dialog.show(manager, "MessageDialog");
-                            Log.i("TAG","Just Showed the dialog.");
-                        }
                     }
                 });
 
