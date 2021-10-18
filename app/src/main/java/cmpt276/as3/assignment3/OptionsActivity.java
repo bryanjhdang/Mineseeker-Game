@@ -19,6 +19,8 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationBarView;
 
+import java.lang.reflect.Array;
+
 import cmpt276.as3.assignment3.model.OptionsData;
 
 /**
@@ -45,6 +47,10 @@ public class OptionsActivity extends AppCompatActivity {
         displayAllSpinners();
     }
 
+    /**
+     * Remove the title bar at the top of the screen that contains
+     * notifications, battery, etc
+     */
     // https://www.youtube.com/watch?v=jOWW95u15S0&ab_channel=TechProjects
     private void removeInitialBars() {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -61,7 +67,7 @@ public class OptionsActivity extends AppCompatActivity {
     }
 
     /**
-     * Create a Spinner and fill it using a string array in strings.xml
+     * Create a Spinner and fill it using a string array in strings.xml\
      * @param spinnerId is the spinner to fill
      * @param stringArrayId is the array of strings to fill the Spinner
      */
