@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -15,6 +16,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationBarView;
@@ -64,7 +66,10 @@ public class OptionsActivity extends AppCompatActivity {
     private void displayAllSpinners() {
         setUpSpinner(R.id.sizeSpinner, R.array.size);
         setUpSpinner(R.id.mineSpinner, R.array.mines);
+
         setSpinnerOptions();
+        setSpinnerColor(R.id.sizeSpinner);
+        setSpinnerColor(R.id.mineSpinner);
     }
 
     /**
@@ -132,6 +137,23 @@ public class OptionsActivity extends AppCompatActivity {
                 Log.d(TAG, "Something went wrong with reading mine number");
                 break;
         }
+    }
+
+    /**
+     * Set the currently selected option of the Spinner to be white
+     */
+    private void setSpinnerColor(int spinnerId) {
+        Spinner spinner = findViewById(spinnerId);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                ((TextView) adapterView.getChildAt(0)).setTextColor(Color.WHITE);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {}
+        });
     }
 
     /**
