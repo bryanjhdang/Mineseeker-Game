@@ -148,8 +148,11 @@ public class GameActivity extends AppCompatActivity {
 
     private void buttonRevealCat(int row, int col) {
         // Display image after the button is clicked.
-        Toast.makeText(GameActivity.this, "Cat found. Well done!", Toast.LENGTH_SHORT)
-                .show();
+        if (catSeeker.checkForMine(row, col) == true && catSeeker.isCellRevealed(row, col) == false) {
+            Toast.makeText(GameActivity.this, "Cat found. Well done!", Toast.LENGTH_SHORT)
+                    .show();
+        }
+
         Button currentButton = buttons[row][col];
         // Lock the button size
         lockButtonSize();
