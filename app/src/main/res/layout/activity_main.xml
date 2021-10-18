@@ -7,19 +7,6 @@
     android:background="@drawable/paw_background"
     tools:context=".WelcomeActivity">
 
-    <Button
-        android:id="@+id/menuButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:backgroundTint="@color/white"
-        android:text="Head to Menu!"
-        app:circularflow_radiusInDP="0dp"
-        app:cornerRadius="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <TextView
         android:id="@+id/welcomeTitle"
         android:layout_width="wrap_content"
@@ -78,11 +65,22 @@
         android:id="@+id/imageView2"
         android:layout_width="42dp"
         android:layout_height="41dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/authors"
+        app:srcCompat="@drawable/couple_cats" />
+
+    <Button
+        android:id="@+id/menuButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:backgroundTint="@color/white"
+        android:text="Head to Menu!"
+        app:circularflow_radiusInDP="0dp"
+        app:cornerRadius="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.332"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/couple_cats" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
