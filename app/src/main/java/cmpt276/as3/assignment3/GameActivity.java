@@ -152,54 +152,6 @@ public class GameActivity extends AppCompatActivity {
         currentButton.setTextColor(0xFFFFFFFF);
     }
 
-
-    /*private void gridButtonClicked(int row, int col) {
-        // Display image after the button is clicked.
-        Button currentButton = buttons[row][col];
-        catSeeker.revealedCell(row, col);
-
-        // Lock the button size
-        lockButtonSize();
-
-
-
-        if (catSeeker.checkForMine(row, col) == true) {
-            Toast.makeText(GameActivity.this, "Cat found. Well done!", Toast.LENGTH_SHORT)
-                    .show();
-
-            // Scale the image to fit inside the button
-            int newWidth = currentButton.getWidth();
-            int newHeight = currentButton.getHeight();
-            Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.cat1);
-            Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
-            Resources resource = getResources();
-            currentButton.setBackground(new BitmapDrawable(resource, scaledBitmap));
-
-            for (int currRow = 0; currRow < numRows; currRow++) {
-                for (int currCol = 0; currCol < numCols; currCol++) {
-                    if (catSeeker.isEmptyCellRevealed(currRow, currCol) == true) {
-                        int scanForMines = catSeeker.numMinesInRowCol(currRow, currCol);
-                        buttons[currRow][currCol].setText("" + scanForMines);
-
-                        buttons[currRow][currCol].setTextColor(0xFFFFFFFF);
-                    }
-                }
-            }
-
-        } else {
-            // It is an empty cell, start the scanner
-            currentButton.setBackgroundResource(0);
-
-            int scanForMines = catSeeker.numMinesInRowCol(row, col);
-            currentButton.setText("" + scanForMines);
-
-            currentButton.setPadding(0,0,0,0);
-            currentButton.setTextSize(22);
-            currentButton.setTypeface(null, Typeface.BOLD);
-            currentButton.setTextColor(0xFFFFFFFF);
-        }
-    }*/
-
     private void lockButtonSize() {
         for (int row = 0; row < numRows; row++) {
             for (int col = 0; col < numCols; col++) {
