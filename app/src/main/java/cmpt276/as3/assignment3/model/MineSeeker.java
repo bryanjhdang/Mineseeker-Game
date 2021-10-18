@@ -49,9 +49,23 @@ public class MineSeeker {
         gameBoard[currentRow][currentCol].setCellInformation(true);
     }
 
+    public boolean isCellRevealed(int currentRow, int currentCol) {
+        if (gameBoard[currentRow][currentCol].getCellInformation() == true) {
+            return true;
+        }
+        return false;
+    }
+
     public boolean isEmptyCellRevealed(int currentRow, int currentCol) {
         if (gameBoard[currentRow][currentCol].getMineInformation() == false
                 && gameBoard[currentRow][currentCol].getCellInformation() == true) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean checkForMine(int row, int col) {
+        if (gameBoard[row][col].getMineInformation() == true) {
             return true;
         }
         return false;
@@ -68,17 +82,12 @@ public class MineSeeker {
         return false;
     }
 
-    public boolean isCellRevealed(int currentRow, int currentCol) {
-        if (gameBoard[currentRow][currentCol].getCellInformation() == true) {
-            return true;
-        }
-        return false;
+    public void setCellScanner(int currentRow, int currentCol) {
+        gameBoard[currentRow][currentCol].setCellScanner(true);
     }
 
-
-    // DELETE LATER
-    public boolean checkForMine(int row, int col) {
-        if (gameBoard[row][col].getMineInformation() == true) {
+    public boolean isCellScannerLocked(int currentRow, int currentCol) {
+        if (gameBoard[currentRow][currentCol].getCellScanner() == true) {
             return true;
         }
         return false;

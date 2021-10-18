@@ -109,7 +109,10 @@ public class GameActivity extends AppCompatActivity {
 
     private void gridButtonClicked(int row, int col) {
         if (catSeeker.checkForMine(row, col) == false) {
-            numScanUsed++;
+            if (catSeeker.isCellScannerLocked(row, col) == false) {
+                numScanUsed++;
+            }
+            catSeeker.setCellScanner(row, col);
             displayNumScanUsed();
             startScanner(row, col);
         }
@@ -119,8 +122,11 @@ public class GameActivity extends AppCompatActivity {
             displayNumCatsFound();
             buttonRevealCat(row, col);
 
-        } else if (catSeeker.checkForMine(row, col) == true && catSeeker.isCellRevealed(row, col) == true){
-            numScanUsed++;
+        } else if (catSeeker.checkForMine(row, col) == true && catSeeker.isCellRevealed(row, col) == true) {
+            if (catSeeker.isCellScannerLocked(row, col) == false) {
+                numScanUsed++;
+            }
+            catSeeker.setCellScanner(row, col);
             displayNumScanUsed();
 
             catSeeker.catClickTwice(row, col);
