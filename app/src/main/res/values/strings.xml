@@ -13,4 +13,6 @@
         <item>15 mines</item>
         <item>20 mines</item>
     </string-array>
+
+    <string name="homepage_276">(<a href='https://opencoursehub.cs.sfu.ca/bfraser/grav-cms/cmpt276/home'>https://opencoursehub.cs.sfu.ca/bfraser/grav-cms/cmpt276/home</a>)</string>
 </resources>
