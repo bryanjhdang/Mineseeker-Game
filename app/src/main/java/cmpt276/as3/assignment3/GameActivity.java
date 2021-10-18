@@ -1,6 +1,7 @@
 package cmpt276.as3.assignment3;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +11,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.View;
@@ -89,6 +91,13 @@ public class GameActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         gridButtonClicked(FINAL_ROW, FINAL_COL);
+
+                        if (numCatsFound == numMines) {
+                            FragmentManager manager = getSupportFragmentManager();
+                            MessageFragment dialog = new MessageFragment();
+                            dialog.show(manager, "MessageDialog");
+                            Log.i("TAG","Just Showed the dialog.");
+                        }
                     }
                 });
 
@@ -109,6 +118,7 @@ public class GameActivity extends AppCompatActivity {
             numCatsFound++;
             displayNumCatsFound();
             buttonRevealCat(row, col);
+
         } else if (catSeeker.checkForMine(row, col) == true && catSeeker.isCellRevealed(row, col) == true){
             numScanUsed++;
             displayNumScanUsed();
