@@ -8,35 +8,71 @@
     android:background="@drawable/paw_background"
     android:layout_gravity="center">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="options"
-        tools:layout_editor_absoluteX="350dp"
-        tools:layout_editor_absoluteY="204dp" />
-
     <Spinner
         android:id="@+id/sizeSpinner"
         android:layout_width="272dp"
         android:layout_height="32dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="2dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginStart="50dp"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toEndOf="@+id/sizeText"
+        app:layout_constraintTop_toTopOf="@+id/sizeText" />
 
     <Spinner
         android:id="@+id/mineSpinner"
         android:layout_width="272dp"
         android:layout_height="32dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="2dp"
+        android:layout_marginStart="50dp"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toEndOf="@+id/mineText"
+        app:layout_constraintTop_toTopOf="@+id/mineText" />
+
+    <TextView
+        android:id="@+id/optionsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="56dp"
+        android:text="Options"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/sizeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="30dp"
+        android:text="Board Size"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/optionsTitle" />
+
+    <TextView
+        android:id="@+id/mineText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="40dp"
+        android:text="# of Mines"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sizeText" />
+
+    <ImageView
+        android:id="@+id/tubbsCat"
+        android:layout_width="171dp"
+        android:layout_height="121dp"
+        android:layout_marginBottom="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sizeSpinner"
-        app:layout_constraintVertical_bias="0.06" />
+        app:srcCompat="@drawable/tubbs_sprite" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

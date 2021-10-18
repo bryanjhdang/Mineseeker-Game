@@ -44,6 +44,7 @@ public class MenuActivity extends AppCompatActivity {
 
     public void setGameButton() {
         Button gameBtn = findViewById(R.id.gameButton);
+        gameBtn.setTextColor(0xFF000000);
         gameBtn.setOnClickListener(view -> {
             Intent i = GameActivity.launchIntent(MenuActivity.this);
             startActivity(i);
@@ -52,6 +53,7 @@ public class MenuActivity extends AppCompatActivity {
 
     public void setOptionsButton() {
         Button optionsBtn = findViewById(R.id.optionsButton);
+        optionsBtn.setTextColor(0xFF000000);
         optionsBtn.setOnClickListener(view -> {
             Intent i = OptionsActivity.launchIntent(MenuActivity.this);
             startActivity(i);
@@ -60,6 +62,7 @@ public class MenuActivity extends AppCompatActivity {
 
     public void setHelpButton() {
         Button helpBtn = findViewById(R.id.helpButton);
+        helpBtn.setTextColor(0xFF000000);
         helpBtn.setOnClickListener(view -> {
             Intent i = HelpActivity.launchIntent(MenuActivity.this);
             startActivity(i);
