@@ -6,17 +6,17 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/congratsCat"
         android:layout_width="91dp"
         android:layout_height="96dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/congratsText"
         app:srcCompat="@drawable/police_cat" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/congratsText"
         android:layout_width="380dp"
         android:layout_height="73dp"
         android:text="You have won! Good work finding all the cats."
