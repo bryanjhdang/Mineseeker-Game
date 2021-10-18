@@ -52,7 +52,6 @@ public class HelpActivity extends AppCompatActivity {
                 "(<a href='https://www.pinterest.com/'>https://www.pinterest.com/</a>)</br>";
         gameSource.setText(HtmlCompat.fromHtml(formattedSource, HtmlCompat.FROM_HTML_MODE_LEGACY));
         gameSource.setMovementMethod(LinkMovementMethod.getInstance());
-
     }
 
     // https://www.youtube.com/watch?v=jOWW95u15S0&ab_channel=TechProjects
