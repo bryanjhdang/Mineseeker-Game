@@ -75,4 +75,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/tubbs_sprite" />
 
+    <Button
+        android:id="@+id/resetButton"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="@color/white"
+        android:text="Reset Games"
+        android:textColor="@color/black"
+        app:cornerRadius="0dp"
+        app:icon="@drawable/ic_baseline_delete_forever_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.934"
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="#D57A66"
+        app:strokeWidth="4dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

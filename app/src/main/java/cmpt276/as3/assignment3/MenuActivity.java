@@ -61,7 +61,7 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     public void setHelpButton() {
-        Button helpBtn = findViewById(R.id.helpButton);
+        Button helpBtn = findViewById(R.id.resetButton);
         helpBtn.setTextColor(0xFF000000);
         helpBtn.setOnClickListener(view -> {
             Intent i = HelpActivity.launchIntent(MenuActivity.this);

@@ -1,6 +1,7 @@
 package cmpt276.as3.assignment3;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -15,6 +16,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +25,8 @@ import com.google.android.material.navigation.NavigationBarView;
 
 import java.lang.reflect.Array;
 
+import cmpt276.as3.assignment3.model.Game;
+import cmpt276.as3.assignment3.model.GameManager;
 import cmpt276.as3.assignment3.model.OptionsData;
 
 /**
@@ -34,6 +38,7 @@ public class OptionsActivity extends AppCompatActivity {
     final int MINE_OPTIONS = 4;
     final String TAG = "TAG_MSG";
     private OptionsData optionsData = OptionsData.getInstance();
+    private GameManager gameManager = GameManager.getInstance();
 
     public static Intent launchIntent(Context c) {
         Intent intent = new Intent(c, OptionsActivity.class);
@@ -47,6 +52,25 @@ public class OptionsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_options);
 
         displayAllSpinners();
+        setUpResetButton();
+    }
+
+    private void setUpResetButton() {
+        Button resetButton = findViewById(R.id.resetButton);
+
+        resetButton.setOnClickListener(view -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(OptionsActivity.this);
+            builder.setMessage("Are you sure to reset the number of game played and the best scores?")
+                    .setPositiveButton("Confirm", (dialogInterface, i) -> {
+                        gameManager.resetAllGames();
+                        finish();
+                    })
+                    .setNegativeButton("Back", null);
+
+            AlertDialog warning = builder.create();
+            warning.show();
+        });
+
     }
 
     /**
