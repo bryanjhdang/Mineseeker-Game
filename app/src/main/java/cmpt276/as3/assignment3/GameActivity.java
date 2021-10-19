@@ -22,6 +22,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import cmpt276.as3.assignment3.model.GameManager;
 import cmpt276.as3.assignment3.model.MineSeeker;
 import cmpt276.as3.assignment3.model.OptionsData;
 
@@ -31,6 +32,8 @@ import cmpt276.as3.assignment3.model.OptionsData;
  */
 public class GameActivity extends AppCompatActivity {
     private OptionsData option = OptionsData.getInstance();
+    private GameManager gameManager = GameManager.getInstance();
+
     private int numCatsFound = 0;
     private int numScanUsed = 0;
     private int numMines;
@@ -51,9 +54,31 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
         getOptionForGrid();
+        displayGameHistory();
         displayNumCatsFound();
         displayNumScanUsed();
         populateButtons();
+    }
+
+    private void displayGameHistory() {
+        // Display the text stating the total number of games started.
+        gameManager.incrementGamesPlayed();
+        TextView totalGamesText = findViewById(R.id.totalGames);
+        String numGames = "Games Started: " + gameManager.getGamesPlayed();
+        totalGamesText.setText(numGames);
+
+        // Display text stating the best score of completed game for that config.
+        TextView bestScoreText = findViewById(R.id.highScore);
+        int score = gameManager.getScoreOfCurrentConfig(numRows, numMines);
+        String configInfo = "Best Score for " + numRows + "x" + numCols + " - " + numMines + " mines: ";
+
+        if (score == 0) {
+            String bestScore = configInfo + "N/A";
+            bestScoreText.setText(bestScore);
+        } else {
+            String bestScore = configInfo + score;
+            bestScoreText.setText(bestScore);
+        }
     }
 
     private void getOptionForGrid() {
@@ -96,6 +121,8 @@ public class GameActivity extends AppCompatActivity {
                         if (numCatsFound == numMines) {
                             FragmentManager manager = getSupportFragmentManager();
                             MessageFragment dialog = new MessageFragment();
+                            gameManager.checkToReplaceScore(numRows, numMines, numScanUsed);
+
                             dialog.show(manager, "MessageDialog");
                             Log.i("TAG","Just Showed the dialog.");
                         }

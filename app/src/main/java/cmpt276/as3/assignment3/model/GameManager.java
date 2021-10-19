@@ -3,16 +3,11 @@ package cmpt276.as3.assignment3.model;
 import java.util.ArrayList;
 
 public class GameManager {
-    final static int ROW_OPTION_ONE = 4;
-    final static int ROW_OPTION_TWO = 5;
-    final static int ROW_OPTION_THREE = 6;
-    final static int MINE_OPTION_ONE = 6;
-    final static int MINE_OPTION_TWO = 10;
-    final static int MINE_OPTION_THREE = 15;
-    final static int MINE_OPTION_FOUR = 20;
 
-    private int gamesPlayed;
+    private int gamesStarted = 0;
     ArrayList<Game> gameConfigList = new ArrayList<>();
+    private int[] rowOptions = new int[] {4, 5, 6};
+    private int[] numMineOptions = new int[] {6, 10, 15, 20};
 
     // Make GameScore class into a Singleton
     private static GameManager instance;
@@ -20,18 +15,11 @@ public class GameManager {
         // Private to prevent anyone from instantiating
 
         // Create all instances of game configurations in gameConfigList
-        gameConfigList.add(new Game(ROW_OPTION_ONE, MINE_OPTION_ONE));
-        gameConfigList.add(new Game(ROW_OPTION_ONE, MINE_OPTION_TWO));
-        gameConfigList.add(new Game(ROW_OPTION_ONE, MINE_OPTION_THREE));
-        gameConfigList.add(new Game(ROW_OPTION_ONE, MINE_OPTION_FOUR));
-        gameConfigList.add(new Game(ROW_OPTION_TWO, MINE_OPTION_ONE));
-        gameConfigList.add(new Game(ROW_OPTION_TWO, MINE_OPTION_TWO));
-        gameConfigList.add(new Game(ROW_OPTION_TWO, MINE_OPTION_THREE));
-        gameConfigList.add(new Game(ROW_OPTION_TWO, MINE_OPTION_FOUR));
-        gameConfigList.add(new Game(ROW_OPTION_THREE, MINE_OPTION_ONE));
-        gameConfigList.add(new Game(ROW_OPTION_THREE, MINE_OPTION_TWO));
-        gameConfigList.add(new Game(ROW_OPTION_THREE, MINE_OPTION_THREE));
-        gameConfigList.add(new Game(ROW_OPTION_THREE, MINE_OPTION_FOUR));
+        for (int row = 0; row < rowOptions.length; row++) {
+            for (int mine = 0; mine < numMineOptions.length; mine++) {
+                gameConfigList.add(new Game(rowOptions[row], numMineOptions[mine]));
+            }
+        }
     }
 
     /**
@@ -47,16 +35,16 @@ public class GameManager {
     }
 
     public void incrementGamesPlayed() {
-        gamesPlayed++;
+        gamesStarted++;
     }
 
     public int getGamesPlayed() {
-        return gamesPlayed;
+        return gamesStarted;
     }
 
     /**
      * Retrieves the index of the corresponding game configuration,
-     * and then checks if the new score is greater than the current one
+     * and then checks if the new score is lower than the current one
      * @param rows
      * @param mineNum
      * @param newScore
@@ -65,7 +53,7 @@ public class GameManager {
         Game currGameConfig = getGameOfCurrentConfig(rows, mineNum);
         int currScore = currGameConfig.getHighScore();
 
-        if(newScore > currScore) {
+        if(currScore == 0 || newScore < currScore) {
             currGameConfig.setHighScore(newScore);
         }
     }
@@ -103,7 +91,7 @@ public class GameManager {
      * high scores of each configuration
      */
     public void resetAllGames() {
-        gamesPlayed = 0;
+        gamesStarted = 0;
 
         // Reset high scores
         for(int idx = 0; idx < gameConfigList.size(); idx++) {

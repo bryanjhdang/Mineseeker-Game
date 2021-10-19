@@ -53,6 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:text="Let's get started!"
+        android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="28sp"
         android:textStyle="bold"
@@ -64,16 +65,26 @@
         android:id="@+id/totalGames"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Games Played:"
-        app:layout_constraintStart_toStartOf="@+id/gameTitle"
+        android:layout_marginTop="4dp"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gameTitle" />
 
     <TextView
-        android:id="@+id/highscore"
+        android:id="@+id/highScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Highest Score:"
-        app:layout_constraintEnd_toEndOf="@+id/gameTitle"
-        app:layout_constraintTop_toBottomOf="@+id/gameTitle" />
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/totalGames" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
