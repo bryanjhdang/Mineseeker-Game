@@ -1,0 +1,97 @@
+package cmpt276.as3.assignment3.model;
+
+import java.util.ArrayList;
+
+public class GameManager {
+    final static int ROW_OPTION_ONE = 4;
+    final static int ROW_OPTION_TWO = 5;
+    final static int ROW_OPTION_THREE = 6;
+    final static int MINE_OPTION_ONE = 6;
+    final static int MINE_OPTION_TWO = 10;
+    final static int MINE_OPTION_THREE = 15;
+    final static int MINE_OPTION_FOUR = 20;
+
+    private int gamesPlayed;
+    ArrayList<Game> gameConfigList = new ArrayList<>();
+
+    // Make GameScore class into a Singleton
+    private static GameManager instance;
+    private GameManager() {
+        // Private to prevent anyone from instantiating
+
+        // Create all instances of game configurations in gameConfigList
+        gameConfigList.add(new Game(ROW_OPTION_ONE, MINE_OPTION_ONE));
+        gameConfigList.add(new Game(ROW_OPTION_ONE, MINE_OPTION_TWO));
+        gameConfigList.add(new Game(ROW_OPTION_ONE, MINE_OPTION_THREE));
+        gameConfigList.add(new Game(ROW_OPTION_ONE, MINE_OPTION_FOUR));
+        gameConfigList.add(new Game(ROW_OPTION_TWO, MINE_OPTION_ONE));
+        gameConfigList.add(new Game(ROW_OPTION_TWO, MINE_OPTION_TWO));
+        gameConfigList.add(new Game(ROW_OPTION_TWO, MINE_OPTION_THREE));
+        gameConfigList.add(new Game(ROW_OPTION_TWO, MINE_OPTION_FOUR));
+        gameConfigList.add(new Game(ROW_OPTION_THREE, MINE_OPTION_ONE));
+        gameConfigList.add(new Game(ROW_OPTION_THREE, MINE_OPTION_TWO));
+        gameConfigList.add(new Game(ROW_OPTION_THREE, MINE_OPTION_THREE));
+        gameConfigList.add(new Game(ROW_OPTION_THREE, MINE_OPTION_FOUR));
+    }
+
+    /**
+     * Method to retrieve the class without accessing
+     * it by the constructor
+     * @return the only instance of the class
+     */
+    public static GameManager getInstance() {
+        if(instance == null) {
+            instance = new GameManager();
+        }
+        return instance;
+    }
+
+    public void incrementGamesPlayed() {
+        gamesPlayed++;
+    }
+
+    public int getGamesPlayed() {
+        return gamesPlayed;
+    }
+
+    /**
+     * Retrieves the index of the corresponding game configuration,
+     * and then checks if the new score is greater than the current one
+     * @param rows
+     * @param mineNum
+     * @param newScore
+     */
+    public void checkScore(int rows, int mineNum, int newScore) {
+        int configListIndex = getIndexOfConfig(rows, mineNum);
+
+        Game currGameConfig = gameConfigList.get(configListIndex);
+        int currScore = currGameConfig.getHighScore();
+
+        if(newScore > currScore) {
+            currGameConfig.setHighScore(newScore);
+        }
+    }
+
+    /**
+     * Checks the list of game configuration to find any games
+     * matching with the rows and number of mines. Return that
+     * game's index if so.
+     * @param rows
+     * @param mineNum
+     * @return
+     */
+    private int getIndexOfConfig(int rows, int mineNum) {
+        for(int idx = 0; idx < gameConfigList.size(); idx++) {
+            Game currGameConfig = gameConfigList.get(idx);
+            if(rows == currGameConfig.getRows() &&
+               mineNum == currGameConfig.getMineNum()) {
+                return idx;
+            }
+        }
+        return 0;
+    }
+
+    public void resetAllGames() {
+        // reset all
+    }
+}
