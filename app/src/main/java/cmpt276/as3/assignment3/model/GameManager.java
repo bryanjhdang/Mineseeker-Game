@@ -62,9 +62,7 @@ public class GameManager {
      * @param newScore
      */
     public void checkToReplaceScore(int rows, int mineNum, int newScore) {
-        int configListIndex = getIndexOfConfig(rows, mineNum);
-
-        Game currGameConfig = gameConfigList.get(configListIndex);
+        Game currGameConfig = getGameOfCurrentConfig(rows, mineNum);
         int currScore = currGameConfig.getHighScore();
 
         if(newScore > currScore) {
@@ -73,22 +71,31 @@ public class GameManager {
     }
 
     /**
-     * Checks the list of game configuration to find any games
-     * matching with the rows and number of mines. Return that
-     * game's index if so.
+     * Returns the high score of the current configuration
      * @param rows
      * @param mineNum
      * @return
      */
-    private int getIndexOfConfig(int rows, int mineNum) {
+    public int getScoreOfCurrentConfig(int rows, int mineNum) {
+        Game currGame = getGameOfCurrentConfig(rows, mineNum);
+        return currGame.getHighScore();
+    }
+
+    /**
+     * Returns the Game representing the current configuration
+     * @param rows
+     * @param mineNum
+     * @return
+     */
+    private Game getGameOfCurrentConfig(int rows, int mineNum) {
         for(int idx = 0; idx < gameConfigList.size(); idx++) {
             Game currGameConfig = gameConfigList.get(idx);
             if(rows == currGameConfig.getRows() &&
                mineNum == currGameConfig.getMineNum()) {
-                return idx;
+                return currGameConfig;
             }
         }
-        return 0;
+        return null;
     }
 
     /**
