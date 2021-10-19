@@ -63,7 +63,6 @@ public class OptionsActivity extends AppCompatActivity {
             builder.setMessage("Are you sure to reset the number of game played and the best scores?")
                     .setPositiveButton("Confirm", (dialogInterface, i) -> {
                         gameManager.resetAllGames();
-                        finish();
                     })
                     .setNegativeButton("Back", null);
 
