@@ -35,9 +35,8 @@
         android:id="@+id/boxCat"
         android:layout_width="177dp"
         android:layout_height="125dp"
-        android:layout_marginStart="-200dp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="36dp"
+        app:layout_constraintEnd_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/welcomeTitle"
         app:srcCompat="@drawable/box_sprite" />
 
@@ -62,7 +61,7 @@
         app:srcCompat="@drawable/cat_head" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/catDuo"
         android:layout_width="42dp"
         android:layout_height="41dp"
         android:layout_marginStart="10dp"
@@ -71,16 +70,16 @@
         app:srcCompat="@drawable/couple_cats" />
 
     <Button
-        android:id="@+id/menuButton"
+        android:id="@+id/skipButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
         android:backgroundTint="@color/white"
-        android:text="Head to Menu!"
+        android:text="Skip!"
         app:circularflow_radiusInDP="0dp"
         app:cornerRadius="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

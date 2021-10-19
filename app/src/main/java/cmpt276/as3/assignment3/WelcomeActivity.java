@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -13,6 +15,7 @@ import android.view.animation.RotateAnimation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 /**
  * Initial activity displayed at startup.
@@ -39,7 +42,7 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     private void setMenuButton() {
-        Button menuBtn = findViewById(R.id.menuButton);
+        Button menuBtn = findViewById(R.id.skipButton);
         menuBtn.setTextColor(0xFF000000);
         menuBtn.setOnClickListener(view -> {
             Intent i = MenuActivity.launchIntent(WelcomeActivity.this);
@@ -55,22 +58,50 @@ public class WelcomeActivity extends AppCompatActivity {
 
     // https://stackoverflow.com/questions/7950383/how-to-move-images-from-left-to-right-in-android
     private void moveCenterCatAcrossScreen() {
-        final float offset = 600.0f;
+        final int animTimeInMilliseconds = 5000;
+
         ImageView boxCat = findViewById(R.id.boxCat);
+        final int catWidth = boxCat.getLayoutParams().width;
 
-        TranslateAnimation anim = new TranslateAnimation(0.0f, getScreenWidth() + offset,
-                0.0f, 0.0f);
-        anim.setDuration(5000);
-        anim.setRepeatCount(Animation.INFINITE);
-
+        // Create animation of cat moving across the screen
+        TranslateAnimation anim = new TranslateAnimation(0.0f,
+                getScreenWidth() + catWidth,
+                0.0f,
+                0.0f);
+        anim.setDuration(animTimeInMilliseconds);
         boxCat.startAnimation(anim);
+
+        // Check to see if the animation finished, change activities if so
+        anim.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {}
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                Intent i = MenuActivity.launchIntent(WelcomeActivity.this);
+                startActivity(i);
+                finish();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {}
+        });
     }
 
+    /**
+     * Calling method to rotate the two cat head icons
+     * in the activity
+     */
     private void rotateAllIcons() {
         rotateIcon(findViewById(R.id.catHead1), -360f);
         rotateIcon(findViewById(R.id.catHead2), 360f);
     }
 
+    /**
+     * Rotate an image 360 degrees continuously
+     * @param img
+     * @param deg
+     */
     // https://stackoverflow.com/questions/32641150/how-to-make-imageview-constantly-spin
     private void rotateIcon(ImageView img, float deg) {
         RotateAnimation rotateAnimation = new RotateAnimation(0, deg,
