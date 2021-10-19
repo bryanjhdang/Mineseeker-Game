@@ -22,37 +22,52 @@
 
     <Button
         android:id="@+id/gameButton"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="120dp"
         android:layout_marginTop="30dp"
         android:backgroundTint="@color/white"
         android:text="Play Game"
+        android:textColor="@color/black"
         app:cornerRadius="0dp"
+        app:icon="@drawable/ic_baseline_play_arrow_24"
+        app:strokeWidth="4dp"
+        app:strokeColor="#D57A66"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/menuTitle" />
 
     <Button
         android:id="@+id/helpButton"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="120dp"
         android:layout_marginTop="25dp"
         android:backgroundTint="@color/white"
         android:text="Help"
+        android:textColor="@color/black"
         app:cornerRadius="0dp"
+        app:icon="@drawable/ic_baseline_help_outline_24"
+        app:strokeWidth="4dp"
+        app:strokeColor="#D57A66"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/optionsButton" />
 
     <Button
         android:id="@+id/optionsButton"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="120dp"
         android:layout_marginTop="25dp"
         android:backgroundTint="@color/white"
         android:text="Options"
+        android:textColor="@color/black"
         app:cornerRadius="0dp"
+        app:icon="@drawable/ic_baseline_add_circle_outline_24"
+        app:strokeWidth="4dp"
+        app:strokeColor="#D57A66"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gameButton" />
 
