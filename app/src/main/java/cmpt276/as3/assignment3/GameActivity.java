@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
@@ -108,7 +109,11 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void gridButtonClicked(int row, int col) {
+        MediaPlayer catSound = MediaPlayer.create(this, R.raw.cat_meow_sound);
+        MediaPlayer scanSound = MediaPlayer.create(this, R.raw.scan_clicked);
+
         if (catSeeker.checkForMine(row, col) == false) {
+            scanSound.start();
             if (catSeeker.isCellScannerLocked(row, col) == false) {
                 numScanUsed++;
             }
@@ -118,11 +123,13 @@ public class GameActivity extends AppCompatActivity {
         }
 
         if (catSeeker.checkForMine(row, col) == true && catSeeker.isCellRevealed(row, col) == false) {
+            catSound.start();
             numCatsFound++;
             displayNumCatsFound();
             buttonRevealCat(row, col);
 
         } else if (catSeeker.checkForMine(row, col) == true && catSeeker.isCellRevealed(row, col) == true) {
+            scanSound.start();
             if (catSeeker.isCellScannerLocked(row, col) == false) {
                 numScanUsed++;
             }
