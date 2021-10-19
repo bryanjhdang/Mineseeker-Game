@@ -61,7 +61,7 @@ public class GameManager {
      * @param mineNum
      * @param newScore
      */
-    public void checkScore(int rows, int mineNum, int newScore) {
+    public void checkToReplaceScore(int rows, int mineNum, int newScore) {
         int configListIndex = getIndexOfConfig(rows, mineNum);
 
         Game currGameConfig = gameConfigList.get(configListIndex);
@@ -91,7 +91,16 @@ public class GameManager {
         return 0;
     }
 
+    /**
+     * Reset the total amount of games played and the
+     * high scores of each configuration
+     */
     public void resetAllGames() {
-        // reset all
+        gamesPlayed = 0;
+
+        // Reset high scores
+        for(int idx = 0; idx < gameConfigList.size(); idx++) {
+            gameConfigList.get(idx).setHighScore(0);
+        }
     }
 }
