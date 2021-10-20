@@ -43,6 +43,8 @@ public class OptionsActivity extends AppCompatActivity {
     final String TAG = "TAG_MSG";
     private OptionsData optionsData = OptionsData.getInstance();
     private GameManager gameManager = GameManager.getInstance();
+    private int currRowNum;
+    private int currMineNum;
 
     public static Intent launchIntent(Context c) {
         Intent intent = new Intent(c, OptionsActivity.class);
@@ -121,8 +123,8 @@ public class OptionsActivity extends AppCompatActivity {
      * chose previously (or default) on the spinner
      */
     private void setSpinnerOptions() {
-        int currRowNum = optionsData.getRowNum();
-        int currMineNum = optionsData.getMineNum();
+        currRowNum = getSaveNumRows(this);
+        currMineNum = getSaveNumMines(this);
 
         Spinner sizeSpinner = findViewById(R.id.sizeSpinner);
         Spinner mineSpinner = findViewById(R.id.mineSpinner);
@@ -222,23 +224,41 @@ public class OptionsActivity extends AppCompatActivity {
         String chosenSize = sizeSpinner.getSelectedItem().toString();
         int sizeIdx = getStringArrayIdx(SIZE_OPTIONS, R.array.size, chosenSize);
 
+        int numRowChosen = 0;
         switch(sizeIdx) {
             case 0:
                 optionsData.setRowNum(4);
                 optionsData.setColumnNum(6);
+                numRowChosen = 4;
                 break;
             case 1:
                 optionsData.setRowNum(5);
                 optionsData.setColumnNum(10);
+                numRowChosen = 5;
                 break;
             case 2:
                 optionsData.setRowNum(6);
                 optionsData.setColumnNum(15);
+                numRowChosen = 6;
                 break;
             default:
                 Log.d(TAG, "Something went wrong with reading the size index");
                 break;
         }
+
+        saveNumRows(numRowChosen);
+    }
+
+    private void saveNumRows(int numRowChosen) {
+        SharedPreferences prefs = this.getSharedPreferences("AppPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("Num Rows Chosen", numRowChosen);
+        editor.apply();
+    }
+
+    public static int getSaveNumRows(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences("AppPrefs", MODE_PRIVATE);
+        return prefs.getInt("Num Rows Chosen", 5);
     }
 
     /**
@@ -250,23 +270,42 @@ public class OptionsActivity extends AppCompatActivity {
         String chosenMineNum = mineSpinner.getSelectedItem().toString();
         int mineNumIdx = getStringArrayIdx(MINE_OPTIONS, R.array.mines, chosenMineNum);
 
+        int numMinesChosen = 0;
         switch(mineNumIdx) {
             case 0:
                 optionsData.setMineNum(6);
+                numMinesChosen = 6;
                 break;
             case 1:
                 optionsData.setMineNum(10);
+                numMinesChosen = 10;
                 break;
             case 2:
                 optionsData.setMineNum(15);
+                numMinesChosen = 15;
                 break;
             case 3:
                 optionsData.setMineNum(20);
+                numMinesChosen = 20;
                 break;
             default:
                 Log.d(TAG, "Something went wrong with reading the mine index");
                 break;
         }
+
+        saveNumMines(numMinesChosen);
+    }
+
+    private void saveNumMines(int numMineChosen) {
+        SharedPreferences prefs = this.getSharedPreferences("AppPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("Num Mines Chosen", numMineChosen);
+        editor.apply();
+    }
+
+    public static int getSaveNumMines(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences("AppPrefs", MODE_PRIVATE);
+        return prefs.getInt("Num Mines Chosen", 10);
     }
 
     /**
