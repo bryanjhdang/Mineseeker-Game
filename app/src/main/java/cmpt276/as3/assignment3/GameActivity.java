@@ -5,6 +5,7 @@ import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -20,8 +21,14 @@ import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.StringTokenizer;
+
+import cmpt276.as3.assignment3.model.GameManager;
 import cmpt276.as3.assignment3.model.MineSeeker;
 import cmpt276.as3.assignment3.model.OptionsData;
 
@@ -31,6 +38,11 @@ import cmpt276.as3.assignment3.model.OptionsData;
  */
 public class GameActivity extends AppCompatActivity {
     private OptionsData option = OptionsData.getInstance();
+    private GameManager gameManager = GameManager.getInstance();
+
+    private int savedGames = 0;
+    private int[] bestScoreList = new int[12];
+
     private int numCatsFound = 0;
     private int numScanUsed = 0;
     private int numMines;
@@ -47,13 +59,55 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Arrays.fill(bestScoreList, 0);
         removeInitialBars();
         setContentView(R.layout.activity_game);
 
+        savedGames = getNumGamesSaved(this);
+        gameManager.setGamesPlayed(savedGames);
+
         getOptionForGrid();
+        displayGameHistory();
         displayNumCatsFound();
         displayNumScanUsed();
         populateButtons();
+    }
+
+    private void displayGameHistory() {
+        // Display the text stating the total number of games started.
+        TextView totalGamesText = findViewById(R.id.totalGames);
+        String displayNumGames = "Games Started: " + savedGames;
+        totalGamesText.setText(displayNumGames);
+
+        gameManager.incrementGamesPlayed();
+        savedGames =  gameManager.getGamesPlayed();
+        saveNumGames(savedGames, this);
+
+        // Display text stating the best score of completed game for that config.
+        TextView bestScoreText = findViewById(R.id.highScore);
+        int score = gameManager.getScoreOfCurrentConfig(numRows, numMines);
+        String configInfo = "Best Score for " + numRows + "x" + numCols + " - " + numMines + " mines: ";
+
+        if (score == 0) {
+            String bestScore = configInfo + "N/A";
+            bestScoreText.setText(bestScore);
+        } else {
+            String bestScore = configInfo + score;
+            bestScoreText.setText(bestScore);
+        }
+    }
+
+    public static void saveNumGames(int numGames, Context context) {
+        SharedPreferences prefs = context.getSharedPreferences("AppPref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("Num games played", numGames);
+        editor.apply();
+    }
+
+    public static int getNumGamesSaved(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences("AppPref", MODE_PRIVATE);
+        return prefs.getInt("Num games played", 0);
     }
 
     private void getOptionForGrid() {
@@ -96,6 +150,8 @@ public class GameActivity extends AppCompatActivity {
                         if (numCatsFound == numMines) {
                             FragmentManager manager = getSupportFragmentManager();
                             MessageFragment dialog = new MessageFragment();
+                            gameManager.checkToReplaceScore(numRows, numMines, numScanUsed);
+
                             dialog.show(manager, "MessageDialog");
                             Log.i("TAG","Just Showed the dialog.");
                         }
@@ -153,13 +209,8 @@ public class GameActivity extends AppCompatActivity {
         scanText.setText(result);
     }
 
+    // Display image of cat after the button is clicked
     private void buttonRevealCat(int row, int col) {
-        // Display image after the button is clicked.
-        if (catSeeker.checkForMine(row, col) == true && catSeeker.isCellRevealed(row, col) == false) {
-            Toast.makeText(GameActivity.this, "Cat found. Well done!", Toast.LENGTH_SHORT)
-                    .show();
-        }
-
         Button currentButton = buttons[row][col];
         // Lock the button size
         lockButtonSize();

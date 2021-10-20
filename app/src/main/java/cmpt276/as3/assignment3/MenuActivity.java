@@ -5,9 +5,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.Writer;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+
+import cmpt276.as3.assignment3.model.Game;
+import cmpt276.as3.assignment3.model.GameManager;
 
 /**
  * Menu activity to navigate between playing a game,
@@ -25,7 +41,6 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         removeInitialBars();
         setContentView(R.layout.activity_main_menu);
-
         displayAllButtons();
     }
 
@@ -61,7 +76,7 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     public void setHelpButton() {
-        Button helpBtn = findViewById(R.id.helpButton);
+        Button helpBtn = findViewById(R.id.resetButton);
         helpBtn.setTextColor(0xFF000000);
         helpBtn.setOnClickListener(view -> {
             Intent i = HelpActivity.launchIntent(MenuActivity.this);
