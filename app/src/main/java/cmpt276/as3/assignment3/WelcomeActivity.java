@@ -4,9 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -15,7 +13,6 @@ import android.view.animation.RotateAnimation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 /**
  * Initial activity displayed at startup.
@@ -99,8 +96,8 @@ public class WelcomeActivity extends AppCompatActivity {
 
     /**
      * Rotate an image 360 degrees continuously
-     * @param img
-     * @param deg
+     * @param img ImageView to rotate
+     * @param deg for the amount of degrees to rotate the image
      */
     // https://stackoverflow.com/questions/32641150/how-to-make-imageview-constantly-spin
     private void rotateIcon(ImageView img, float deg) {

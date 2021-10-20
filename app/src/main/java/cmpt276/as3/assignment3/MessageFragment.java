@@ -9,8 +9,10 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatDialogFragment;
 
-import cmpt276.as3.assignment3.model.GameManager;
-
+/**
+ * Activity used to display a congrats message when all
+ * the mines are found
+ */
 public class MessageFragment extends AppCompatDialogFragment {
 
     @Override

@@ -15,4 +15,15 @@
     </string-array>
 
     <string name="homepage_276">(<a href='https://opencoursehub.cs.sfu.ca/bfraser/grav-cms/cmpt276/home'>https://opencoursehub.cs.sfu.ca/bfraser/grav-cms/cmpt276/home</a>)</string>
+    <string name="options">Options</string>
+    <string name="board_size">Board Size</string>
+    <string name="of_mines"># of Mines</string>
+    <string name="reset_games">Reset Games</string>
+    <string name="you_have_won_good_work_finding_all_the_cats">You have won! Good work finding all the cats.</string>
+    <string name="play_game">Play Game</string>
+    <string name="cat_seeker">Cat Seeker</string>
+    <string name="help">Help</string>
+    <string name="by_bryan_dang_and_lynn_nguyen">by Bryan Dang and Lynn Nguyen</string>
+    <string name="skip">Skip!</string>
+    <string name="let_s_get_started">Let\'s get started!</string>
 </resources>

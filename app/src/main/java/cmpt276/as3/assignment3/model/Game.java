@@ -1,8 +1,12 @@
 package cmpt276.as3.assignment3.model;
 
+/**
+ * Class that represents a single game configuration,
+ * along with its highest score
+ */
 public class Game {
-    private int rows;
-    private int mineNum;
+    final private int rows;
+    final private int mineNum;
     private int highScore;
 
     public Game(int rows, int mineNum) {

@@ -2,12 +2,14 @@ package cmpt276.as3.assignment3.model;
 
 import java.util.ArrayList;
 
+/**
+ * Class that handles holding the highest score of each game
+ * configuration, as well as the number of games started
+ */
 public class GameManager {
 
     private int gamesStarted = 0;
     ArrayList<Game> gameConfigList = new ArrayList<>();
-    private int[] rowOptions = new int[] {4, 5, 6};
-    private int[] numMineOptions = new int[] {6, 10, 15, 20};
 
     // Make GameScore class into a Singleton
     private static GameManager instance;
@@ -15,6 +17,9 @@ public class GameManager {
         // Private to prevent anyone from instantiating
 
         // Create all instances of game configurations in gameConfigList
+        int[] rowOptions = new int[]{4, 5, 6};
+        int[] numMineOptions = new int[]{6, 10, 15, 20};
+
         for (int row = 0; row < rowOptions.length; row++) {
             for (int mine = 0; mine < numMineOptions.length; mine++) {
                 gameConfigList.add(new Game(rowOptions[row], numMineOptions[mine]));
@@ -49,9 +54,6 @@ public class GameManager {
     /**
      * Retrieves the index of the corresponding game configuration,
      * and then checks if the new score is lower than the current one
-     * @param rows
-     * @param mineNum
-     * @param newScore
      */
     public void checkToReplaceScore(int rows, int mineNum, int newScore) {
         Game currGameConfig = getGameOfCurrentConfig(rows, mineNum);
@@ -65,9 +67,6 @@ public class GameManager {
 
     /**
      * Returns the high score of the current configuration
-     * @param rows
-     * @param mineNum
-     * @return
      */
     public int getScoreOfCurrentConfig(int rows, int mineNum) {
         Game currGame = getGameOfCurrentConfig(rows, mineNum);

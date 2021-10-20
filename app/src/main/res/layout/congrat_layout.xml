@@ -19,7 +19,7 @@
         android:id="@+id/congratsText"
         android:layout_width="380dp"
         android:layout_height="73dp"
-        android:text="You have won! Good work finding all the cats."
+        android:text="@string/you_have_won_good_work_finding_all_the_cats"
         android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
