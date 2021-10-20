@@ -24,6 +24,10 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationBarView;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import cmpt276.as3.assignment3.model.Game;
 import cmpt276.as3.assignment3.model.GameManager;
@@ -63,6 +67,7 @@ public class OptionsActivity extends AppCompatActivity {
             builder.setMessage("Are you sure to reset the number of game played and the best scores?")
                     .setPositiveButton("Confirm", (dialogInterface, i) -> {
                         gameManager.resetAllGames();
+                        GameActivity.saveNumGames(0,this);
                         Toast.makeText(OptionsActivity.this, "Number of games played reset to 0!",
                                 Toast.LENGTH_SHORT)
                                 .show();

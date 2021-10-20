@@ -46,10 +46,6 @@ public class GameManager {
         gamesStarted = numGames;
     }
 
-    public ArrayList<Game> getGameConfigList() {
-        return gameConfigList;
-    }
-
     /**
      * Retrieves the index of the corresponding game configuration,
      * and then checks if the new score is lower than the current one
@@ -65,6 +61,7 @@ public class GameManager {
             currGameConfig.setHighScore(newScore);
         }
     }
+
 
     /**
      * Returns the high score of the current configuration
@@ -104,17 +101,6 @@ public class GameManager {
         // Reset high scores
         for(int idx = 0; idx < gameConfigList.size(); idx++) {
             gameConfigList.get(idx).setHighScore(0);
-        }
-    }
-
-    /**
-     * Copy the list of game config
-     */
-    public void copyConfigList(ArrayList<Game> tempList){
-        for (int item = 0; item < tempList.size(); item++) {
-            int scorePerConfig = tempList.get(item).getHighScore();
-
-            gameConfigList.get(item).setHighScore(scorePerConfig);
         }
     }
 }

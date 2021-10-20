@@ -5,6 +5,7 @@ import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -20,7 +21,12 @@ import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.StringTokenizer;
 
 import cmpt276.as3.assignment3.model.GameManager;
 import cmpt276.as3.assignment3.model.MineSeeker;
@@ -33,6 +39,9 @@ import cmpt276.as3.assignment3.model.OptionsData;
 public class GameActivity extends AppCompatActivity {
     private OptionsData option = OptionsData.getInstance();
     private GameManager gameManager = GameManager.getInstance();
+
+    private int savedGames = 0;
+    private int[] bestScoreList = new int[12];
 
     private int numCatsFound = 0;
     private int numScanUsed = 0;
@@ -50,8 +59,13 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Arrays.fill(bestScoreList, 0);
         removeInitialBars();
         setContentView(R.layout.activity_game);
+
+        savedGames = getNumGamesSaved(this);
+        gameManager.setGamesPlayed(savedGames);
 
         getOptionForGrid();
         displayGameHistory();
@@ -62,10 +76,13 @@ public class GameActivity extends AppCompatActivity {
 
     private void displayGameHistory() {
         // Display the text stating the total number of games started.
-        gameManager.incrementGamesPlayed();
         TextView totalGamesText = findViewById(R.id.totalGames);
-        String numGames = "Games Started: " + gameManager.getGamesPlayed();
-        totalGamesText.setText(numGames);
+        String displayNumGames = "Games Started: " + savedGames;
+        totalGamesText.setText(displayNumGames);
+
+        gameManager.incrementGamesPlayed();
+        savedGames =  gameManager.getGamesPlayed();
+        saveNumGames(savedGames, this);
 
         // Display text stating the best score of completed game for that config.
         TextView bestScoreText = findViewById(R.id.highScore);
@@ -79,6 +96,18 @@ public class GameActivity extends AppCompatActivity {
             String bestScore = configInfo + score;
             bestScoreText.setText(bestScore);
         }
+    }
+
+    public static void saveNumGames(int numGames, Context context) {
+        SharedPreferences prefs = context.getSharedPreferences("AppPref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("Num games played", numGames);
+        editor.apply();
+    }
+
+    public static int getNumGamesSaved(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences("AppPref", MODE_PRIVATE);
+        return prefs.getInt("Num games played", 0);
     }
 
     private void getOptionForGrid() {

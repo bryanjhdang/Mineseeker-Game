@@ -30,9 +30,6 @@ import cmpt276.as3.assignment3.model.GameManager;
  * options, and help screen
  */
 public class MenuActivity extends AppCompatActivity {
-    private static GameManager gameManager = GameManager.getInstance();
-    // Create Json instance
-    private Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     public static Intent launchIntent(Context c) {
         Intent intent = new Intent(c, MenuActivity.class);
@@ -43,64 +40,8 @@ public class MenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         removeInitialBars();
-
-        // Read information from the existing Json file
-        readFromFile(gson);
-
         setContentView(R.layout.activity_main_menu);
         displayAllButtons();
-    }
-
-    /**
-     * Method to read information about the previous game states from the JSon file into the ArrayList of Game.
-     */
-    private static void readFromFile(Gson gson) {
-        ArrayList<Game> tempList;
-
-        try {
-            // Read from Json file
-            Reader readList = Files.newBufferedReader(Paths.get(".\\gameConfigList.json"));
-            tempList = gson.fromJson(readList, new TypeToken<ArrayList<Game>>() {}.getType());
-            if (tempList.size() != 0) {
-                gameManager.copyConfigList(tempList);
-            }
-            readList.close();
-
-            // Read the number of game played from a different JSon file.
-            Reader readGamesPlayed = Files.newBufferedReader(Paths.get(".\\gameNumGames.json"));
-            int numGamesPlayed = gson.fromJson(readGamesPlayed, new TypeToken<Integer>() {}.getType());
-            if (numGamesPlayed != 0) {
-                gameManager.setGamesPlayed(numGamesPlayed);
-            }
-            readGamesPlayed.close();
-
-        } catch (IOException ioe) {
-            Log.i("TAG", "Cannot read information from the file.");
-        }
-    }
-
-
-    @Override
-    public void onBackPressed() {
-        writeToFile(gson);
-        super.onBackPressed();
-    }
-
-    private void writeToFile(Gson gson) {
-        try {
-            // Start writing from the ArrayList into json file
-            Writer writeList = new FileWriter(".\\gameConfigList.json");
-            gson.toJson(gameManager.getGameConfigList(), writeList);
-            writeList.close();
-
-            // Save the number of games played into different file.
-            Writer writeNumGames = new FileWriter(".\\gameNumGames.json");
-            gson.toJson(gameManager.getGamesPlayed(), writeNumGames);
-            writeNumGames.close();
-
-        } catch (IOException ioe) {
-            Log.i("TAG", "Cannot read information from the file.");
-        }
     }
 
     // https://www.youtube.com/watch?v=jOWW95u15S0&ab_channel=TechProjects
