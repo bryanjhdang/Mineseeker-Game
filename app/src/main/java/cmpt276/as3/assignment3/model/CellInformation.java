@@ -1,5 +1,9 @@
 package cmpt276.as3.assignment3.model;
 
+/**
+ * Class to store the information of one cell on the grid.
+ * Show whether the cell has mine, cell has been revealed yet.
+ */
 public class CellInformation {
     private boolean hasMine;
     private boolean shownCell;

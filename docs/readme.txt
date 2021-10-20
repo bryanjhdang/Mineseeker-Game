@@ -16,5 +16,6 @@ Optional Features
      - Options screen has button to reset number games played to 0 + reset scores
      - Saves best score for each game config
      - Displays best score + games played while playing the game
-     - *** DOES NOT store the best score between launches, ONLY the games started ***
+
+     - *** DOES NOT store the best score between launches, ONLY the total number of games started ***
         It works when you press "back" from the app but not when you close it.

@@ -10,8 +10,9 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 /**
- * Activity used to display a congrats message when all
- * the mines are found
+ * Activity that support the Game Activity once the player wins.
+ * Display a congrats dialog when all the mines are found.
+ * Return to Main Menu after player clicks OK.
  */
 public class MessageFragment extends AppCompatDialogFragment {
 

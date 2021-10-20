@@ -1,10 +1,11 @@
 package cmpt276.as3.assignment3.model;
 
-
 /**
- * Class that handles the game logic.
+ * Class that handles the game logic of the Game Activity.
+ * Distribute the mines randomly and handle the scanner for each cell.
  */
 public class MineSeeker {
+
     private int numMines;
     private int numRows;
     private int numCols;
@@ -26,14 +27,14 @@ public class MineSeeker {
     }
 
     /**
-     * Class to randomly place the number of mines into the gameboard
+     * Method randomly places the number of mines into the game board.
      */
     private void randMinesPosition() {
         int countMines = 0;
 
         while (countMines < numMines) {
-            int randRow = (int) ((Math.random() * (numRows - 0)) + 0);
-            int randCol = (int) ((Math.random() * (numCols - 0)) + 0);
+            int randRow = (int) (Math.random() * numRows);
+            int randCol = (int) (Math.random() * numCols);
 
             if (gameBoard[randRow][randCol].getMineInformation() == false) {
                 gameBoard[randRow][randCol].setMineInformation(true);
@@ -43,7 +44,7 @@ public class MineSeeker {
     }
 
     /**
-     * Class to change the cell status when it is revealed to the user.
+     * Methods that handle the cell status when it is revealed to the player.
      */
     public void revealedCell(int currentRow, int currentCol) {
         gameBoard[currentRow][currentCol].setCellInformation(true);
@@ -107,7 +108,7 @@ public class MineSeeker {
             }
         }
 
-        // Then scan vertically of the currentCol
+        // Then scan vertically of the currentColumn.
         for (int row = 0; row < numRows; row++) {
             if (row != currentRow) {
                 if (gameBoard[row][currentCol].getMineInformation() == true
@@ -116,7 +117,6 @@ public class MineSeeker {
                 }
             }
         }
-
         return countMines;
     }
 }

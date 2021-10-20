@@ -22,27 +22,18 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.StringTokenizer;
-
 import cmpt276.as3.assignment3.model.GameManager;
 import cmpt276.as3.assignment3.model.MineSeeker;
 import cmpt276.as3.assignment3.model.OptionsData;
 
-
 /**
- * Activity that displays the game
+ * Game Activity: allow user to play the Mine Seeker game.
  */
 public class GameActivity extends AppCompatActivity {
     private OptionsData option = OptionsData.getInstance();
     private GameManager gameManager = GameManager.getInstance();
 
     private int savedGames = 0;
-    private int[] bestScoreList = new int[12];
-
     private int numCatsFound = 0;
     private int numScanUsed = 0;
     private int numMines;
@@ -59,14 +50,14 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        Arrays.fill(bestScoreList, 0);
         removeInitialBars();
         setContentView(R.layout.activity_game);
 
+        // Retrieve the number of games played after the app is closed and launched again.
         savedGames = getNumGamesSaved(this);
         gameManager.setGamesPlayed(savedGames);
 
+        // Handle the UI of the game screen.
         getOptionForGrid();
         displayGameHistory();
         displayNumCatsFound();
@@ -84,7 +75,7 @@ public class GameActivity extends AppCompatActivity {
         savedGames =  gameManager.getGamesPlayed();
         saveNumGames(savedGames, this);
 
-        // Display text stating the best score of completed game for that config.
+        // Display text stating the best score of completed game for that configuration.
         TextView bestScoreText = findViewById(R.id.highScore);
         int score = gameManager.getScoreOfCurrentConfig(numRows, numMines);
         String configInfo = "Best Score for " + numRows + "x" + numCols + " - " + numMines + " mines: ";
@@ -98,6 +89,7 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
+    // Methods that save the number of games played between launches.
     public static void saveNumGames(int numGames, Context context) {
         SharedPreferences prefs = context.getSharedPreferences("AppPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
@@ -119,10 +111,10 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void populateButtons() {
-        TableLayout table = (TableLayout) findViewById(R.id.tableForButtons);
+        TableLayout table = findViewById(R.id.tableForButtons);
 
         for (int row = 0; row < numRows; row++) {
-            // Populate the rows
+            // Populate the rows for the grid.
             TableRow tableRow = new TableRow(GameActivity.this);
             tableRow.setLayoutParams(new TableLayout.LayoutParams(
                     TableLayout.LayoutParams.MATCH_PARENT,
@@ -189,6 +181,7 @@ public class GameActivity extends AppCompatActivity {
             if (catSeeker.isCellScannerLocked(row, col) == false) {
                 numScanUsed++;
             }
+
             catSeeker.setCellScanner(row, col);
             displayNumScanUsed();
 
@@ -198,18 +191,18 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void displayNumCatsFound() {
-        TextView foundText = (TextView) findViewById(R.id.numCatsFound);
+        TextView foundText = findViewById(R.id.numCatsFound);
         String result = "Found " + numCatsFound + " of " + numMines + " Cats";
         foundText.setText(result);
     }
 
     private void displayNumScanUsed() {
-        TextView scanText = (TextView) findViewById(R.id.numScansUsed);
+        TextView scanText = findViewById(R.id.numScansUsed);
         String result = "# Scans used: " + numScanUsed + "";
         scanText.setText(result);
     }
 
-    // Display image of cat after the button is clicked
+    // Display an image of cat after the button is clicked
     private void buttonRevealCat(int row, int col) {
         Button currentButton = buttons[row][col];
         // Lock the button size
@@ -224,7 +217,7 @@ public class GameActivity extends AppCompatActivity {
         Resources resource = getResources();
         currentButton.setBackground(new BitmapDrawable(resource, scaledBitmap));
 
-        int scanForMines = 0;
+        int scanForMines;
         // Check text in the cat cell if it is click again.
         if (catSeeker.isClickTwice(row, col) == true) {
             scanForMines = catSeeker.numMinesInRowCol(row, col);
@@ -232,7 +225,7 @@ public class GameActivity extends AppCompatActivity {
             buttons[row][col].setTextColor(0xFFFFFFFF);
         }
 
-        // Change text on other empty revealed cell when one cat is found.
+        // Change the number on the empty revealed cells when one cat is found.
         for (int currRow = 0; currRow < numRows; currRow++) {
             for (int currCol = 0; currCol < numCols; currCol++) {
                 if (catSeeker.isEmptyCellRevealed(currRow, currCol) == true
@@ -255,7 +248,6 @@ public class GameActivity extends AppCompatActivity {
         int scanForMines = catSeeker.numMinesInRowCol(row, col);
         currentButton.setBackgroundResource(0);
         currentButton.setText("" + scanForMines);
-
         currentButton.setTypeface(null, Typeface.BOLD);
         currentButton.setTextColor(0xFFFFFFFF);
     }
@@ -276,7 +268,7 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    // https://www.youtube.com/watch?v=jOWW95u15S0&ab_channel=TechProjects
+    //Source: https://www.youtube.com/watch?v=jOWW95u15S0&ab_channel=TechProjects
     private void removeInitialBars() {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,

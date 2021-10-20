@@ -23,17 +23,18 @@ import cmpt276.as3.assignment3.model.GameManager;
 import cmpt276.as3.assignment3.model.OptionsData;
 
 /**
- * Options activity to let the user choose board size
- * and number of mines for the next game
+ * Option Screen: let the user choose board size
+ * and number of mines for the next game.
+ * Has reset button to reset the number of games played and best scores to 0.
  */
 public class OptionsActivity extends AppCompatActivity {
-    final int SIZE_OPTIONS = 3;
-    final int MINE_OPTIONS = 4;
-    final String TAG = "TAG_MSG";
+
+    private final int SIZE_OPTIONS = 3;
+    private final int MINE_OPTIONS = 4;
+    private final String TAG = "TAG_MSG";
+
     private OptionsData optionsData = OptionsData.getInstance();
     private GameManager gameManager = GameManager.getInstance();
-    private int currRowNum;
-    private int currMineNum;
 
     public static Intent launchIntent(Context c) {
         Intent intent = new Intent(c, OptionsActivity.class);
@@ -50,32 +51,36 @@ public class OptionsActivity extends AppCompatActivity {
         setUpResetButton();
     }
 
+    /**
+     * Method to implement the reset button that allow user to reset the number of games played,
+     * and best score for each game configuration.
+     */
     private void setUpResetButton() {
         Button resetButton = findViewById(R.id.resetButton);
 
         resetButton.setOnClickListener(view -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(OptionsActivity.this);
+
             builder.setMessage("Are you sure to reset the number of game played and the best scores?")
                     .setPositiveButton("Confirm", (dialogInterface, i) -> {
                         gameManager.resetAllGames();
                         GameActivity.saveNumGames(0,this);
-                        Toast.makeText(OptionsActivity.this, "Number of games played reset to 0!",
-                                Toast.LENGTH_SHORT)
-                                .show();
+                        Toast.makeText(OptionsActivity.this,
+                                "Number of games played reset to 0!",
+                                Toast.LENGTH_SHORT).show();
                     })
                     .setNegativeButton("Back", null);
 
             AlertDialog warning = builder.create();
             warning.show();
         });
-
     }
 
     /**
      * Remove the title bar at the top of the screen that contains
-     * notifications, battery, etc
+     * notifications, battery, etc.
      */
-    // https://www.youtube.com/watch?v=jOWW95u15S0&ab_channel=TechProjects
+    //Source: https://www.youtube.com/watch?v=jOWW95u15S0&ab_channel=TechProjects
     private void removeInitialBars() {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -112,8 +117,8 @@ public class OptionsActivity extends AppCompatActivity {
      * chose previously (or default) on the spinner
      */
     private void setSpinnerOptions() {
-        currRowNum = getSaveNumRows(this);
-        currMineNum = getSaveNumMines(this);
+        int currRowNum = getSaveNumRows(this);
+        int currMineNum = getSaveNumMines(this);
 
         Spinner sizeSpinner = findViewById(R.id.sizeSpinner);
         Spinner mineSpinner = findViewById(R.id.mineSpinner);
@@ -180,10 +185,8 @@ public class OptionsActivity extends AppCompatActivity {
 
     /**
      * Return the index in the array of strings that matches with the String parameter
-     * @param arraySize
      * @param arrayId is the array of strings to check with
      * @param chosenItem is the String being checked
-     * @return
      */
     private int getStringArrayIdx(int arraySize, int arrayId, String chosenItem) {
         int chosenIdx = 0;

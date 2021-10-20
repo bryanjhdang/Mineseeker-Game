@@ -15,8 +15,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 /**
- * Initial activity displayed at startup.
- * Displays welcome message and an option to move to the main menu.
+ * Welcome Screen: Initial activity displayed at startup.
+ * Displays animation and an option to skip to the main menu after ~5 seconds.
  */
 public class WelcomeActivity extends AppCompatActivity {
 
@@ -31,7 +31,7 @@ public class WelcomeActivity extends AppCompatActivity {
         setMenuButton();
     }
 
-    // https://www.youtube.com/watch?v=jOWW95u15S0&ab_channel=TechProjects
+    //Source: https://www.youtube.com/watch?v=jOWW95u15S0&ab_channel=TechProjects
     private void removeInitialBars() {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -48,15 +48,17 @@ public class WelcomeActivity extends AppCompatActivity {
         });
     }
 
-    // https://stackoverflow.com/questions/4743116/get-screen-width-and-height-in-android
+    /**
+     * Methods to implement the animation of the cat moving across the screen.
+     */
+    //Source: https://stackoverflow.com/questions/4743116/get-screen-width-and-height-in-android
     private float getScreenWidth() {
         return Resources.getSystem().getDisplayMetrics().widthPixels;
     }
 
-    // https://stackoverflow.com/questions/7950383/how-to-move-images-from-left-to-right-in-android
+    //Source: https://stackoverflow.com/questions/7950383/how-to-move-images-from-left-to-right-in-android
     private void moveCenterCatAcrossScreen() {
         final int animTimeInMilliseconds = 5000;
-
         ImageView boxCat = findViewById(R.id.boxCat);
         final int catWidth = boxCat.getLayoutParams().width;
 
@@ -86,7 +88,7 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     /**
-     * Calling method to rotate the two cat head icons
+     * Calling method to rotate the two cat head icons next to the game title.
      * in the activity
      */
     private void rotateAllIcons() {
